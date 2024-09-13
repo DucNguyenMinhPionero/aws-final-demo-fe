@@ -8,7 +8,15 @@
 		"start": "next start",
 		"lint": "next lint",
 		"prepare": "husky",
-		"format": "eslint . --fix"
+		"format": "eslint . --fix",
+		"lint-staged": "lint-staged"
+	},
+	"lint-staged": {
+		"*.ts": [
+			"yarn lint",
+			"yarn format",
+			"git add ."
+		]
 	},
 	"dependencies": {
 		"@typescript-eslint/parser": "^8.5.0",
