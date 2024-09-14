@@ -18,5 +18,12 @@
 			"providerPlugin": "awscloudformation",
 			"service": "Cognito"
 		}
+	},
+	"storage": {
+		"s3429f4301": {
+			"dependsOn": [],
+			"providerPlugin": "awscloudformation",
+			"service": "S3"
+		}
 	}
 }
