@@ -12,6 +12,8 @@ Second, run the development server:
 yarn dev
 ```
 
+Third, for installing amplify backend folder, please read the construction in your slack channel aws team
+
 Or you can run production server:
 ```bash
 yarn build
