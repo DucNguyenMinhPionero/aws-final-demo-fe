@@ -1,5 +1,5 @@
 {
-	"Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.12.1\",\"stackType\":\"auth-Cognito\",\"metadata\":{}}",
+	"Description": "Amplify Cognito Stack for AWS Amplify CLI",
 	"AWSTemplateFormatVersion": "2010-09-09",
 	"Parameters": {
 		"env": {
@@ -156,12 +156,6 @@
 				"UserAttributeUpdateSettings": {
 					"AttributesRequireVerificationBeforeUpdate": ["email"]
 				},
-				"UsernameAttributes": {
-					"Ref": "usernameAttributes"
-				},
-				"UsernameConfiguration": {
-					"CaseSensitive": false
-				},
 				"UserPoolName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
@@ -183,21 +177,27 @@
 							]
 						}
 					]
+				},
+				"UsernameAttributes": {
+					"Ref": "usernameAttributes"
+				},
+				"UsernameConfiguration": {
+					"CaseSensitive": false
 				}
 			}
 		},
 		"UserPoolClientWeb": {
 			"Type": "AWS::Cognito::UserPoolClient",
 			"Properties": {
-				"UserPoolId": {
-					"Ref": "UserPool"
-				},
 				"ClientName": "crawli48b8b45e_app_clientWeb",
 				"RefreshTokenValidity": {
 					"Ref": "userpoolClientRefreshTokenValidity"
 				},
 				"TokenValidityUnits": {
 					"RefreshToken": "days"
+				},
+				"UserPoolId": {
+					"Ref": "UserPool"
 				}
 			},
 			"DependsOn": ["UserPool"]
@@ -205,9 +205,6 @@
 		"UserPoolClient": {
 			"Type": "AWS::Cognito::UserPoolClient",
 			"Properties": {
-				"UserPoolId": {
-					"Ref": "UserPool"
-				},
 				"ClientName": "crawli48b8b45e_app_client",
 				"GenerateSecret": {
 					"Ref": "userpoolClientGenerateSecret"
@@ -217,6 +214,9 @@
 				},
 				"TokenValidityUnits": {
 					"RefreshToken": "days"
+				},
+				"UserPoolId": {
+					"Ref": "UserPool"
 				}
 			},
 			"DependsOn": ["UserPool"]

@@ -1,0 +1,10 @@
+{
+	"resourceName": "s3429f4301",
+	"policyUUID": "429f4301",
+	"bucketName": "crawlingappfed3e3c09c6c9548b48631fd2f92f20b23",
+	"storageAccess": "auth",
+	"guestAccess": [],
+	"authAccess": ["CREATE_AND_UPDATE", "READ", "DELETE"],
+	"triggerFunction": "NONE",
+	"groupAccess": {}
+}
