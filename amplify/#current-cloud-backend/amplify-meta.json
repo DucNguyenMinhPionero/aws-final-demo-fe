@@ -1,15 +1,15 @@
 {
 	"providers": {
 		"awscloudformation": {
-			"AuthRoleName": "amplify-crawlingappfe-dev-78f6b-authRole",
-			"UnauthRoleArn": "arn:aws:iam::411209203002:role/amplify-crawlingappfe-dev-78f6b-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::411209203002:role/amplify-crawlingappfe-dev-78f6b-authRole",
-			"Region": "us-east-1",
-			"DeploymentBucketName": "amplify-crawlingappfe-dev-78f6b-deployment",
-			"UnauthRoleName": "amplify-crawlingappfe-dev-78f6b-unauthRole",
-			"StackName": "amplify-crawlingappfe-dev-78f6b",
-			"StackId": "arn:aws:cloudformation:us-east-1:411209203002:stack/amplify-crawlingappfe-dev-78f6b/0f5f4530-7240-11ef-8dad-0ebe12142f1b",
-			"AmplifyAppId": "dbv5xaulpccsc"
+			"AuthRoleName": "amplify-crawlingappfe-dev-e5f6b-authRole",
+			"UnauthRoleArn": "arn:aws:iam::845778290046:role/amplify-crawlingappfe-dev-e5f6b-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::845778290046:role/amplify-crawlingappfe-dev-e5f6b-authRole",
+			"Region": "ap-northeast-1",
+			"DeploymentBucketName": "amplify-crawlingappfe-dev-e5f6b-deployment",
+			"UnauthRoleName": "amplify-crawlingappfe-dev-e5f6b-unauthRole",
+			"StackName": "amplify-crawlingappfe-dev-e5f6b",
+			"StackId": "arn:aws:cloudformation:ap-northeast-1:845778290046:stack/amplify-crawlingappfe-dev-e5f6b/1458a750-724c-11ef-a032-06a6b1e78543",
+			"AmplifyAppId": "d29qh8j7553j4y"
 		}
 	}
 }
