@@ -1,6 +1,7 @@
 "use client";
 
 import {
+	Button,
 	withAuthenticator,
 	WithAuthenticatorProps,
 } from "@aws-amplify/ui-react";
@@ -14,11 +15,11 @@ Amplify.configure(config);
 
 function Home({ signOut, user }: WithAuthenticatorProps) {
 	return (
-		<div>
-			<h1>Hello {user?.username}</h1>
-			<button type="button" onClick={signOut}>
+		<div className="flex justify-between mx-2">
+			<h1>Hello {user?.username}!</h1>
+			<Button color="#ededed" type="button" onClick={signOut}>
 				Sign out
-			</button>
+			</Button>
 		</div>
 	);
 }
