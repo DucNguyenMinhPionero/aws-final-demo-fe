@@ -118,14 +118,6 @@ export const schema = {
 					type: "model",
 					properties: {},
 				},
-				{
-					type: "key",
-					properties: {
-						name: "candidatesByDate",
-						queryField: "candidatesByDate",
-						fields: ["metadata", "createdAt"],
-					},
-				},
 			],
 		},
 		Posts: {

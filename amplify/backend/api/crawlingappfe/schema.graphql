@@ -7,19 +7,13 @@ type Users @model {
   email: String!
 }
 
-type Candidates
- @model {
+type Candidates @model {
   id: ID!
   post: [Posts] @hasMany
   email: String!
   name: String!
   profileUrl: String!
   metadata: AWSJSON
-    @index(
-      name: "candidatesByDate"
-      queryField: "candidatesByDate"
-      sortKeyFields: ["createdAt"]
-    )
   createdAt: AWSDateTime!
 }
 

@@ -261,21 +261,6 @@ export type ModelPostsFilterInput = {
 	candidatesPostId?: ModelIDInput | null;
 };
 
-export type ModelStringKeyConditionInput = {
-	eq?: string | null;
-	le?: string | null;
-	lt?: string | null;
-	ge?: string | null;
-	gt?: string | null;
-	between?: Array<string | null> | null;
-	beginsWith?: string | null;
-};
-
-export enum ModelSortDirection {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
 export type ModelSubscriptionUsersFilterInput = {
 	id?: ModelSubscriptionIDInput | null;
 	email?: ModelSubscriptionStringInput | null;
@@ -797,36 +782,6 @@ export type SyncPostsQuery = {
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
 			candidatesPostId?: string | null;
-		} | null>;
-		nextToken?: string | null;
-		startedAt?: number | null;
-	} | null;
-};
-
-export type CandidatesByDateQueryVariables = {
-	metadata: string;
-	createdAt?: ModelStringKeyConditionInput | null;
-	sortDirection?: ModelSortDirection | null;
-	filter?: ModelCandidatesFilterInput | null;
-	limit?: number | null;
-	nextToken?: string | null;
-};
-
-export type CandidatesByDateQuery = {
-	candidatesByDate?: {
-		__typename: "ModelCandidatesConnection";
-		items: Array<{
-			__typename: "Candidates";
-			id: string;
-			email: string;
-			name: string;
-			profileUrl: string;
-			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
-			_version: number;
-			_deleted?: boolean | null;
-			_lastChangedAt: number;
 		} | null>;
 		nextToken?: string | null;
 		startedAt?: number | null;
