@@ -13,10 +13,9 @@ import {
 	TextAreaField,
 	TextField,
 } from "@aws-amplify/ui-react";
+import { Candidates } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { generateClient } from "aws-amplify/api";
-import { createCandidates } from "../graphql/mutations";
-const client = generateClient();
+import { DataStore } from "aws-amplify/datastore";
 export default function CandidatesCreateForm(props) {
 	const {
 		clearOnSuccess = true,
@@ -73,6 +72,23 @@ export default function CandidatesCreateForm(props) {
 		setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
 		return validationResponse;
 	};
+	const convertToLocal = (date) => {
+		const df = new Intl.DateTimeFormat("default", {
+			year: "numeric",
+			month: "2-digit",
+			day: "2-digit",
+			hour: "2-digit",
+			minute: "2-digit",
+			calendar: "iso8601",
+			numberingSystem: "latn",
+			hourCycle: "h23",
+		});
+		const parts = df.formatToParts(date).reduce((acc, part) => {
+			acc[part.type] = part.value;
+			return acc;
+		}, {});
+		return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+	};
 	return (
 		<Grid
 			as="form"
@@ -116,14 +132,7 @@ export default function CandidatesCreateForm(props) {
 							modelFields[key] = null;
 						}
 					});
-					await client.graphql({
-						query: createCandidates.replaceAll("__typename", ""),
-						variables: {
-							input: {
-								...modelFields,
-							},
-						},
-					});
+					await DataStore.save(new Candidates(modelFields));
 					if (onSuccess) {
 						onSuccess(modelFields);
 					}
@@ -132,8 +141,7 @@ export default function CandidatesCreateForm(props) {
 					}
 				} catch (err) {
 					if (onError) {
-						const messages = err.errors.map((e) => e.message).join("\n");
-						onError(modelFields, messages);
+						onError(modelFields, err.message);
 					}
 				}
 			}}
@@ -255,9 +263,11 @@ export default function CandidatesCreateForm(props) {
 				label="Created at"
 				isRequired={true}
 				isReadOnly={false}
-				value={createdAt}
+				type="datetime-local"
+				value={createdAt && convertToLocal(new Date(createdAt))}
 				onChange={(e) => {
-					let { value } = e.target;
+					let value =
+						e.target.value === "" ? "" : new Date(e.target.value).toISOString();
 					if (onChange) {
 						const modelFields = {
 							email,

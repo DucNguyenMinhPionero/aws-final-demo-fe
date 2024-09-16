@@ -13,11 +13,9 @@ import {
 	TextAreaField,
 	TextField,
 } from "@aws-amplify/ui-react";
+import { Candidates } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { generateClient } from "aws-amplify/api";
-import { getCandidates } from "../graphql/queries";
-import { updateCandidates } from "../graphql/mutations";
-const client = generateClient();
+import { DataStore } from "aws-amplify/datastore";
 export default function CandidatesUpdateForm(props) {
 	const {
 		id: idProp,
@@ -63,12 +61,7 @@ export default function CandidatesUpdateForm(props) {
 	React.useEffect(() => {
 		const queryData = async () => {
 			const record = idProp
-				? (
-						await client.graphql({
-							query: getCandidates.replaceAll("__typename", ""),
-							variables: { id: idProp },
-						})
-					)?.data?.getCandidates
+				? await DataStore.query(Candidates, idProp)
 				: candidatesModelProp;
 			setCandidatesRecord(record);
 		};
@@ -99,6 +92,23 @@ export default function CandidatesUpdateForm(props) {
 		setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
 		return validationResponse;
 	};
+	const convertToLocal = (date) => {
+		const df = new Intl.DateTimeFormat("default", {
+			year: "numeric",
+			month: "2-digit",
+			day: "2-digit",
+			hour: "2-digit",
+			minute: "2-digit",
+			calendar: "iso8601",
+			numberingSystem: "latn",
+			hourCycle: "h23",
+		});
+		const parts = df.formatToParts(date).reduce((acc, part) => {
+			acc[part.type] = part.value;
+			return acc;
+		}, {});
+		return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+	};
 	return (
 		<Grid
 			as="form"
@@ -111,7 +121,7 @@ export default function CandidatesUpdateForm(props) {
 					email,
 					name,
 					profileUrl,
-					metadata: metadata ?? null,
+					metadata,
 					createdAt,
 				};
 				const validationResponses = await Promise.all(
@@ -142,22 +152,17 @@ export default function CandidatesUpdateForm(props) {
 							modelFields[key] = null;
 						}
 					});
-					await client.graphql({
-						query: updateCandidates.replaceAll("__typename", ""),
-						variables: {
-							input: {
-								id: candidatesRecord.id,
-								...modelFields,
-							},
-						},
-					});
+					await DataStore.save(
+						Candidates.copyOf(candidatesRecord, (updated) => {
+							Object.assign(updated, modelFields);
+						}),
+					);
 					if (onSuccess) {
 						onSuccess(modelFields);
 					}
 				} catch (err) {
 					if (onError) {
-						const messages = err.errors.map((e) => e.message).join("\n");
-						onError(modelFields, messages);
+						onError(modelFields, err.message);
 					}
 				}
 			}}
@@ -280,9 +285,11 @@ export default function CandidatesUpdateForm(props) {
 				label="Created at"
 				isRequired={true}
 				isReadOnly={false}
-				value={createdAt}
+				type="datetime-local"
+				value={createdAt && convertToLocal(new Date(createdAt))}
 				onChange={(e) => {
-					let { value } = e.target;
+					let value =
+						e.target.value === "" ? "" : new Date(e.target.value).toISOString();
 					if (onChange) {
 						const modelFields = {
 							email,

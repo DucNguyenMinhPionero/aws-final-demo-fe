@@ -10,7 +10,7 @@ import {
 	TextAreaFieldProps,
 	TextFieldProps,
 } from "@aws-amplify/ui-react";
-import { Candidates } from "../API.ts";
+import { Candidates } from "../models";
 export declare type EscapeHatchProps = {
 	[elementHierarchy: string]: Record<string, unknown>;
 } | null;

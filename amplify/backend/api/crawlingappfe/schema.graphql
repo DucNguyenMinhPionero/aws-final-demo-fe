@@ -7,7 +7,8 @@ type Users @model {
   email: String!
 }
 
-type Candidates @model {
+type Candidates
+ @model {
   id: ID!
   post: [Posts] @hasMany
   email: String!
@@ -19,7 +20,7 @@ type Candidates @model {
       queryField: "candidatesByDate"
       sortKeyFields: ["createdAt"]
     )
-  createdAt: String!
+  createdAt: AWSDateTime!
 }
 
 type Posts @model {
@@ -28,3 +29,4 @@ type Posts @model {
   content: String!
   candidate: Candidates @belongsTo
 }
+

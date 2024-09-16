@@ -7,10 +7,9 @@
 /* eslint-disable */
 import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import { Posts } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { generateClient } from "aws-amplify/api";
-import { createPosts } from "../graphql/mutations";
-const client = generateClient();
+import { DataStore } from "aws-amplify/datastore";
 export default function PostsCreateForm(props) {
 	const {
 		clearOnSuccess = true,
@@ -95,14 +94,7 @@ export default function PostsCreateForm(props) {
 							modelFields[key] = null;
 						}
 					});
-					await client.graphql({
-						query: createPosts.replaceAll("__typename", ""),
-						variables: {
-							input: {
-								...modelFields,
-							},
-						},
-					});
+					await DataStore.save(new Posts(modelFields));
 					if (onSuccess) {
 						onSuccess(modelFields);
 					}
@@ -111,8 +103,7 @@ export default function PostsCreateForm(props) {
 					}
 				} catch (err) {
 					if (onError) {
-						const messages = err.errors.map((e) => e.message).join("\n");
-						onError(modelFields, messages);
+						onError(modelFields, err.message);
 					}
 				}
 			}}

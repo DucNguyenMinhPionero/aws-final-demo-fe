@@ -1,9 +1,8 @@
 {
-	"AppSyncApiName": "crawlingapp",
+	"AppSyncApiName": "crawlingappfe",
 	"DynamoDBBillingMode": "PAY_PER_REQUEST",
 	"DynamoDBEnableServerSideEncryption": false,
 	"AuthCognitoUserPoolId": {
 		"Fn::GetAtt": ["authcrawlingappfe42f1fb7a", "Outputs.UserPoolId"]
-	},
-	"AuthModeLastUpdated": "2024-09-16T06:55:39.897Z"
+	}
 }

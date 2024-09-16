@@ -98,7 +98,7 @@ export const schema = {
 				createdAt: {
 					name: "createdAt",
 					isArray: false,
-					type: "String",
+					type: "AWSDateTime",
 					isRequired: true,
 					attributes: [],
 				},
@@ -202,5 +202,5 @@ export const schema = {
 	enums: {},
 	nonModels: {},
 	codegenVersion: "3.4.4",
-	version: "e38d6a9a48af13079db801173b170b93",
+	version: "9220b64680caeff35b0c6ccab0862e91",
 };
