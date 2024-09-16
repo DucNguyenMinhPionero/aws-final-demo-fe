@@ -118,6 +118,10 @@ export const schema = {
 					type: "model",
 					properties: {},
 				},
+				{
+					type: "searchable",
+					properties: {},
+				},
 			],
 		},
 		Posts: {
@@ -186,6 +190,10 @@ export const schema = {
 			attributes: [
 				{
 					type: "model",
+					properties: {},
+				},
+				{
+					type: "searchable",
 					properties: {},
 				},
 			],

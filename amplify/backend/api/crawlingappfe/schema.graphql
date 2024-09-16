@@ -7,7 +7,7 @@ type Users @model {
   email: String!
 }
 
-type Candidates @model {
+type Candidates @model @searchable {
   id: ID!
   post: [Posts] @hasMany
   email: String!
@@ -17,7 +17,7 @@ type Candidates @model {
   createdAt: AWSDateTime!
 }
 
-type Posts @model {
+type Posts @model @searchable {
   id: ID!
   postUrl: String!
   content: String!

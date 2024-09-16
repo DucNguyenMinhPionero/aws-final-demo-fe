@@ -209,6 +209,214 @@ export type DeletePostsInput = {
 	_version?: number | null;
 };
 
+export type SearchableCandidatesFilterInput = {
+	id?: SearchableIDFilterInput | null;
+	email?: SearchableStringFilterInput | null;
+	name?: SearchableStringFilterInput | null;
+	profileUrl?: SearchableStringFilterInput | null;
+	metadata?: SearchableStringFilterInput | null;
+	createdAt?: SearchableStringFilterInput | null;
+	updatedAt?: SearchableStringFilterInput | null;
+	_version?: SearchableIntFilterInput | null;
+	_deleted?: SearchableBooleanFilterInput | null;
+	_lastChangedAt?: SearchableIntFilterInput | null;
+	and?: Array<SearchableCandidatesFilterInput | null> | null;
+	or?: Array<SearchableCandidatesFilterInput | null> | null;
+	not?: SearchableCandidatesFilterInput | null;
+};
+
+export type SearchableIDFilterInput = {
+	ne?: string | null;
+	gt?: string | null;
+	lt?: string | null;
+	gte?: string | null;
+	lte?: string | null;
+	eq?: string | null;
+	match?: string | null;
+	matchPhrase?: string | null;
+	matchPhrasePrefix?: string | null;
+	multiMatch?: string | null;
+	exists?: boolean | null;
+	wildcard?: string | null;
+	regexp?: string | null;
+	range?: Array<string | null> | null;
+};
+
+export type SearchableStringFilterInput = {
+	ne?: string | null;
+	gt?: string | null;
+	lt?: string | null;
+	gte?: string | null;
+	lte?: string | null;
+	eq?: string | null;
+	match?: string | null;
+	matchPhrase?: string | null;
+	matchPhrasePrefix?: string | null;
+	multiMatch?: string | null;
+	exists?: boolean | null;
+	wildcard?: string | null;
+	regexp?: string | null;
+	range?: Array<string | null> | null;
+};
+
+export type SearchableIntFilterInput = {
+	ne?: number | null;
+	gt?: number | null;
+	lt?: number | null;
+	gte?: number | null;
+	lte?: number | null;
+	eq?: number | null;
+	range?: Array<number | null> | null;
+};
+
+export type SearchableBooleanFilterInput = {
+	eq?: boolean | null;
+	ne?: boolean | null;
+};
+
+export type SearchableCandidatesSortInput = {
+	field?: SearchableCandidatesSortableFields | null;
+	direction?: SearchableSortDirection | null;
+};
+
+export enum SearchableCandidatesSortableFields {
+	id = "id",
+	email = "email",
+	name = "name",
+	profileUrl = "profileUrl",
+	metadata = "metadata",
+	createdAt = "createdAt",
+	updatedAt = "updatedAt",
+	_version = "_version",
+	_deleted = "_deleted",
+	_lastChangedAt = "_lastChangedAt",
+}
+
+export enum SearchableSortDirection {
+	asc = "asc",
+	desc = "desc",
+}
+
+export type SearchableCandidatesAggregationInput = {
+	name: string;
+	type: SearchableAggregateType;
+	field: SearchableCandidatesAggregateField;
+};
+
+export enum SearchableAggregateType {
+	terms = "terms",
+	avg = "avg",
+	min = "min",
+	max = "max",
+	sum = "sum",
+	cardinality = "cardinality",
+}
+
+export enum SearchableCandidatesAggregateField {
+	id = "id",
+	email = "email",
+	name = "name",
+	profileUrl = "profileUrl",
+	metadata = "metadata",
+	createdAt = "createdAt",
+	updatedAt = "updatedAt",
+	_version = "_version",
+	_deleted = "_deleted",
+	_lastChangedAt = "_lastChangedAt",
+}
+
+export type SearchableCandidatesConnection = {
+	__typename: "SearchableCandidatesConnection";
+	items: Array<Candidates | null>;
+	nextToken?: string | null;
+	total?: number | null;
+	aggregateItems: Array<SearchableAggregateResult | null>;
+};
+
+export type SearchableAggregateResult = {
+	__typename: "SearchableAggregateResult";
+	name: string;
+	result?: SearchableAggregateGenericResult | null;
+};
+
+export type SearchableAggregateGenericResult =
+	| SearchableAggregateScalarResult
+	| SearchableAggregateBucketResult;
+
+export type SearchableAggregateScalarResult = {
+	__typename: "SearchableAggregateScalarResult";
+	value: number;
+};
+
+export type SearchableAggregateBucketResult = {
+	__typename: "SearchableAggregateBucketResult";
+	buckets?: Array<SearchableAggregateBucketResultItem | null> | null;
+};
+
+export type SearchableAggregateBucketResultItem = {
+	__typename: "SearchableAggregateBucketResultItem";
+	key: string;
+	doc_count: number;
+};
+
+export type SearchablePostsFilterInput = {
+	id?: SearchableIDFilterInput | null;
+	postUrl?: SearchableStringFilterInput | null;
+	content?: SearchableStringFilterInput | null;
+	createdAt?: SearchableStringFilterInput | null;
+	updatedAt?: SearchableStringFilterInput | null;
+	_version?: SearchableIntFilterInput | null;
+	_deleted?: SearchableBooleanFilterInput | null;
+	_lastChangedAt?: SearchableIntFilterInput | null;
+	candidatesPostId?: SearchableIDFilterInput | null;
+	and?: Array<SearchablePostsFilterInput | null> | null;
+	or?: Array<SearchablePostsFilterInput | null> | null;
+	not?: SearchablePostsFilterInput | null;
+};
+
+export type SearchablePostsSortInput = {
+	field?: SearchablePostsSortableFields | null;
+	direction?: SearchableSortDirection | null;
+};
+
+export enum SearchablePostsSortableFields {
+	id = "id",
+	postUrl = "postUrl",
+	content = "content",
+	createdAt = "createdAt",
+	updatedAt = "updatedAt",
+	_version = "_version",
+	_deleted = "_deleted",
+	_lastChangedAt = "_lastChangedAt",
+	candidatesPostId = "candidatesPostId",
+}
+
+export type SearchablePostsAggregationInput = {
+	name: string;
+	type: SearchableAggregateType;
+	field: SearchablePostsAggregateField;
+};
+
+export enum SearchablePostsAggregateField {
+	id = "id",
+	postUrl = "postUrl",
+	content = "content",
+	createdAt = "createdAt",
+	updatedAt = "updatedAt",
+	_version = "_version",
+	_deleted = "_deleted",
+	_lastChangedAt = "_lastChangedAt",
+	candidatesPostId = "candidatesPostId",
+}
+
+export type SearchablePostsConnection = {
+	__typename: "SearchablePostsConnection";
+	items: Array<Posts | null>;
+	nextToken?: string | null;
+	total?: number | null;
+	aggregateItems: Array<SearchableAggregateResult | null>;
+};
+
 export type ModelUsersFilterInput = {
 	id?: ModelIDInput | null;
 	email?: ModelStringInput | null;
@@ -554,6 +762,105 @@ export type DeletePostsMutation = {
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
 		candidatesPostId?: string | null;
+	} | null;
+};
+
+export type SearchCandidatesQueryVariables = {
+	filter?: SearchableCandidatesFilterInput | null;
+	sort?: Array<SearchableCandidatesSortInput | null> | null;
+	limit?: number | null;
+	nextToken?: string | null;
+	from?: number | null;
+	aggregates?: Array<SearchableCandidatesAggregationInput | null> | null;
+};
+
+export type SearchCandidatesQuery = {
+	searchCandidates?: {
+		__typename: "SearchableCandidatesConnection";
+		items: Array<{
+			__typename: "Candidates";
+			id: string;
+			email: string;
+			name: string;
+			profileUrl: string;
+			metadata?: string | null;
+			createdAt: string;
+			updatedAt: string;
+			_version: number;
+			_deleted?: boolean | null;
+			_lastChangedAt: number;
+		} | null>;
+		nextToken?: string | null;
+		total?: number | null;
+		aggregateItems: Array<{
+			__typename: "SearchableAggregateResult";
+			name: string;
+			result:
+				| (
+						| {
+								__typename: "SearchableAggregateScalarResult";
+								value: number;
+						  }
+						| {
+								__typename: "SearchableAggregateBucketResult";
+								buckets?: Array<{
+									__typename: string;
+									key: string;
+									doc_count: number;
+								} | null> | null;
+						  }
+				  )
+				| null;
+		} | null>;
+	} | null;
+};
+
+export type SearchPostsQueryVariables = {
+	filter?: SearchablePostsFilterInput | null;
+	sort?: Array<SearchablePostsSortInput | null> | null;
+	limit?: number | null;
+	nextToken?: string | null;
+	from?: number | null;
+	aggregates?: Array<SearchablePostsAggregationInput | null> | null;
+};
+
+export type SearchPostsQuery = {
+	searchPosts?: {
+		__typename: "SearchablePostsConnection";
+		items: Array<{
+			__typename: "Posts";
+			id: string;
+			postUrl: string;
+			content: string;
+			createdAt: string;
+			updatedAt: string;
+			_version: number;
+			_deleted?: boolean | null;
+			_lastChangedAt: number;
+			candidatesPostId?: string | null;
+		} | null>;
+		nextToken?: string | null;
+		total?: number | null;
+		aggregateItems: Array<{
+			__typename: "SearchableAggregateResult";
+			name: string;
+			result:
+				| (
+						| {
+								__typename: "SearchableAggregateScalarResult";
+								value: number;
+						  }
+						| {
+								__typename: "SearchableAggregateBucketResult";
+								buckets?: Array<{
+									__typename: string;
+									key: string;
+									doc_count: number;
+								} | null> | null;
+						  }
+				  )
+				| null;
+		} | null>;
 	} | null;
 };
 
