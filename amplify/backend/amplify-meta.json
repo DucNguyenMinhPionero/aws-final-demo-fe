@@ -25,7 +25,16 @@
       ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "apiKeyConfig": {
+                "apiKeyExpirationDate": "2025-09-16T06:56:49.868Z",
+                "apiKeyExpirationDays": 365,
+                "description": "authorize "
+              },
+              "authenticationType": "API_KEY"
+            }
+          ],
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
@@ -34,15 +43,43 @@
           }
         },
         "GraphQLAPIIdOutput": "ihyxwqj4ezht3lp2tn5mkdrohu",
-        "GraphQLAPIEndpointOutput": "https://ojitbkvql5hqvisec2nmfxhdou.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+        "GraphQLAPIEndpointOutput": "https://ojitbkvql5hqvisec2nmfxhdou.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-vhykl7etjzcjvebozcgj6ycvdu"
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2024-09-16T06:37:01.965Z",
+      "lastPushTimeStamp": "2024-09-16T07:16:23.866Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-crawlingappfe-dev-683f8-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apicrawlingapp"
       }
+    },
+    "crawlingapp-dev": {
+      "service": "AppSync",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS"
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY"
+            }
+          ],
+          "userPoolConfig": {
+            "userPoolId": "ap-northeast-1_Xry2D37zI",
+            "awsRegion": "ap-northeast-1",
+            "defaultAction": "ALLOW",
+            "appIdClientRegex": null
+          }
+        },
+        "GraphQLAPIIdOutput": "ihyxwqj4ezht3lp2tn5mkdrohu",
+        "GraphQLAPIEndpointOutput": "https://ojitbkvql5hqvisec2nmfxhdou.appsync-api.ap-northeast-1.amazonaws.com/graphql",
+        "name": "crawlingapp-dev",
+        "region": "ap-northeast-1",
+        "GraphQLAPIKeyOutput": "da2-vhykl7etjzcjvebozcgj6ycvdu"
+      },
+      "lastPushTimeStamp": "2024-09-16T07:15:40.748Z"
     }
   },
   "auth": {
@@ -80,7 +117,7 @@
         "IdentityPoolName": "crawlingappfe42f1fb7a_identitypool_42f1fb7a__dev",
         "UserPoolName": "crawlingappfe42f1fb7a_userpool_42f1fb7a"
       },
-      "lastPushTimeStamp": "2024-09-16T06:37:01.968Z",
+      "lastPushTimeStamp": "2024-09-16T07:16:23.875Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-crawlingappfe-dev-683f8-deployment/amplify-cfn-templates/auth/crawlingappfe42f1fb7a-cloudformation-template.json",
         "logicalId": "authcrawlingappfe42f1fb7a"
@@ -96,7 +133,7 @@
         "BucketName": "crawlingappfe1923e8a8c2f84f2b8df6d1b9e1e367c2683f8-dev",
         "Region": "ap-northeast-1"
       },
-      "lastPushTimeStamp": "2024-09-16T06:37:03.764Z",
+      "lastPushTimeStamp": "2024-09-16T07:16:30.972Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-crawlingappfe-dev-683f8-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storages36e8ca1c7"

@@ -13,9 +13,11 @@ import {
 	TextAreaField,
 	TextField,
 } from "@aws-amplify/ui-react";
-import { Candidates } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { DataStore } from "aws-amplify/datastore";
+import { generateClient } from "aws-amplify/api";
+import { getCandidates } from "../graphql/queries";
+import { updateCandidates } from "../graphql/mutations";
+const client = generateClient();
 export default function CandidatesUpdateForm(props) {
 	const {
 		id: idProp,
@@ -61,7 +63,12 @@ export default function CandidatesUpdateForm(props) {
 	React.useEffect(() => {
 		const queryData = async () => {
 			const record = idProp
-				? await DataStore.query(Candidates, idProp)
+				? (
+						await client.graphql({
+							query: getCandidates.replaceAll("__typename", ""),
+							variables: { id: idProp },
+						})
+					)?.data?.getCandidates
 				: candidatesModelProp;
 			setCandidatesRecord(record);
 		};
@@ -104,7 +111,7 @@ export default function CandidatesUpdateForm(props) {
 					email,
 					name,
 					profileUrl,
-					metadata,
+					metadata: metadata ?? null,
 					createdAt,
 				};
 				const validationResponses = await Promise.all(
@@ -135,17 +142,22 @@ export default function CandidatesUpdateForm(props) {
 							modelFields[key] = null;
 						}
 					});
-					await DataStore.save(
-						Candidates.copyOf(candidatesRecord, (updated) => {
-							Object.assign(updated, modelFields);
-						}),
-					);
+					await client.graphql({
+						query: updateCandidates.replaceAll("__typename", ""),
+						variables: {
+							input: {
+								id: candidatesRecord.id,
+								...modelFields,
+							},
+						},
+					});
 					if (onSuccess) {
 						onSuccess(modelFields);
 					}
 				} catch (err) {
 					if (onError) {
-						onError(modelFields, err.message);
+						const messages = err.errors.map((e) => e.message).join("\n");
+						onError(modelFields, messages);
 					}
 				}
 			}}

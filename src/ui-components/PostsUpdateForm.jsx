@@ -7,9 +7,11 @@
 /* eslint-disable */
 import * as React from "react";
 import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
-import { Posts } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { DataStore } from "aws-amplify/datastore";
+import { generateClient } from "aws-amplify/api";
+import { getPosts } from "../graphql/queries";
+import { updatePosts } from "../graphql/mutations";
+const client = generateClient();
 export default function PostsUpdateForm(props) {
 	const {
 		id: idProp,
@@ -41,7 +43,12 @@ export default function PostsUpdateForm(props) {
 	React.useEffect(() => {
 		const queryData = async () => {
 			const record = idProp
-				? await DataStore.query(Posts, idProp)
+				? (
+						await client.graphql({
+							query: getPosts.replaceAll("__typename", ""),
+							variables: { id: idProp },
+						})
+					)?.data?.getPosts
 				: postsModelProp;
 			setPostsRecord(record);
 		};
@@ -109,17 +116,22 @@ export default function PostsUpdateForm(props) {
 							modelFields[key] = null;
 						}
 					});
-					await DataStore.save(
-						Posts.copyOf(postsRecord, (updated) => {
-							Object.assign(updated, modelFields);
-						}),
-					);
+					await client.graphql({
+						query: updatePosts.replaceAll("__typename", ""),
+						variables: {
+							input: {
+								id: postsRecord.id,
+								...modelFields,
+							},
+						},
+					});
 					if (onSuccess) {
 						onSuccess(modelFields);
 					}
 				} catch (err) {
 					if (onError) {
-						onError(modelFields, err.message);
+						const messages = err.errors.map((e) => e.message).join("\n");
+						onError(modelFields, messages);
 					}
 				}
 			}}
