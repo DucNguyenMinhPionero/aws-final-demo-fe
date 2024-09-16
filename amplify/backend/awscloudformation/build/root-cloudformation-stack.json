@@ -239,6 +239,26 @@
         }
       }
     },
+    "apicrawlingapp": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-crawlingappfe-dev-683f8-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "Parameters": {
+          "AppSyncApiName": "crawlingapp",
+          "DynamoDBBillingMode": "PAY_PER_REQUEST",
+          "DynamoDBEnableServerSideEncryption": false,
+          "AuthCognitoUserPoolId": {
+            "Fn::GetAtt": [
+              "authcrawlingappfe42f1fb7a",
+              "Outputs.UserPoolId"
+            ]
+          },
+          "S3DeploymentBucket": "amplify-crawlingappfe-dev-683f8-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/218e818cd6c7e0a690474c0d4d1ec07b1872d6e5",
+          "env": "dev"
+        }
+      }
+    },
     "UpdateRolesWithIDPFunction": {
       "DependsOn": [
         "AuthRole",

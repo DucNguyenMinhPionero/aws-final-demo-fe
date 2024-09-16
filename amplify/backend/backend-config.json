@@ -1,4 +1,28 @@
 {
+	"api": {
+		"crawlingapp": {
+			"dependsOn": [
+				{
+					"attributes": ["UserPoolId"],
+					"category": "auth",
+					"resourceName": "crawlingappfe42f1fb7a"
+				}
+			],
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authcrawlingappfe42f1fb7a"
+						}
+					}
+				}
+			},
+			"providerPlugin": "awscloudformation",
+			"service": "AppSync"
+		}
+	},
 	"auth": {
 		"crawlingappfe42f1fb7a": {
 			"customAuth": false,
