@@ -7,7 +7,7 @@ type Users @model {
   email: String!
 }
 
-type Candidates @model @searchable {
+type Candidates @model {
   id: ID!
   post: [Posts] @hasMany
   email: String!
