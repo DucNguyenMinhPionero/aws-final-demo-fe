@@ -3,3 +3,5 @@ amplify-codegen-temp/models/models
 src/ui-components
 src/models
 amplify
+src/API.ts
+src/graphql
