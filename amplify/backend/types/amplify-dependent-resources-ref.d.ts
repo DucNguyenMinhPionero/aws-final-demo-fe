@@ -1,4 +1,11 @@
 export type AmplifyDependentResourcesAttributes = {
+	api: {
+		crawlingappfe: {
+			GraphQLAPIEndpointOutput: "string";
+			GraphQLAPIIdOutput: "string";
+			GraphQLAPIKeyOutput: "string";
+		};
+	};
 	auth: {
 		crawlingappfe42f1fb7a: {
 			AppClientID: "string";

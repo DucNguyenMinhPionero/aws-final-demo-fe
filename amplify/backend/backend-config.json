@@ -1,4 +1,37 @@
 {
+	"api": {
+		"crawlingappfe": {
+			"dependsOn": [
+				{
+					"attributes": ["UserPoolId"],
+					"category": "auth",
+					"resourceName": "crawlingappfe42f1fb7a"
+				}
+			],
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [
+						{
+							"apiKeyConfig": {
+								"apiKeyExpirationDate": "2024-10-16T07:57:22.150Z",
+								"apiKeyExpirationDays": 30,
+								"description": ""
+							},
+							"authenticationType": "API_KEY"
+						}
+					],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authcrawlingappfe42f1fb7a"
+						}
+					}
+				}
+			},
+			"providerPlugin": "awscloudformation",
+			"service": "AppSync"
+		}
+	},
 	"auth": {
 		"crawlingappfe42f1fb7a": {
 			"customAuth": false,
