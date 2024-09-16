@@ -17,7 +17,7 @@ type Candidates @model @searchable {
   createdAt: AWSDateTime!
 }
 
-type Posts @model @searchable {
+type Posts @model {
   id: ID!
   postUrl: String!
   content: String!

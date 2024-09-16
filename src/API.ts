@@ -359,64 +359,6 @@ export type SearchableAggregateBucketResultItem = {
 	doc_count: number;
 };
 
-export type SearchablePostsFilterInput = {
-	id?: SearchableIDFilterInput | null;
-	postUrl?: SearchableStringFilterInput | null;
-	content?: SearchableStringFilterInput | null;
-	createdAt?: SearchableStringFilterInput | null;
-	updatedAt?: SearchableStringFilterInput | null;
-	_version?: SearchableIntFilterInput | null;
-	_deleted?: SearchableBooleanFilterInput | null;
-	_lastChangedAt?: SearchableIntFilterInput | null;
-	candidatesPostId?: SearchableIDFilterInput | null;
-	and?: Array<SearchablePostsFilterInput | null> | null;
-	or?: Array<SearchablePostsFilterInput | null> | null;
-	not?: SearchablePostsFilterInput | null;
-};
-
-export type SearchablePostsSortInput = {
-	field?: SearchablePostsSortableFields | null;
-	direction?: SearchableSortDirection | null;
-};
-
-export enum SearchablePostsSortableFields {
-	id = "id",
-	postUrl = "postUrl",
-	content = "content",
-	createdAt = "createdAt",
-	updatedAt = "updatedAt",
-	_version = "_version",
-	_deleted = "_deleted",
-	_lastChangedAt = "_lastChangedAt",
-	candidatesPostId = "candidatesPostId",
-}
-
-export type SearchablePostsAggregationInput = {
-	name: string;
-	type: SearchableAggregateType;
-	field: SearchablePostsAggregateField;
-};
-
-export enum SearchablePostsAggregateField {
-	id = "id",
-	postUrl = "postUrl",
-	content = "content",
-	createdAt = "createdAt",
-	updatedAt = "updatedAt",
-	_version = "_version",
-	_deleted = "_deleted",
-	_lastChangedAt = "_lastChangedAt",
-	candidatesPostId = "candidatesPostId",
-}
-
-export type SearchablePostsConnection = {
-	__typename: "SearchablePostsConnection";
-	items: Array<Posts | null>;
-	nextToken?: string | null;
-	total?: number | null;
-	aggregateItems: Array<SearchableAggregateResult | null>;
-};
-
 export type ModelUsersFilterInput = {
 	id?: ModelIDInput | null;
 	email?: ModelStringInput | null;
@@ -789,55 +731,6 @@ export type SearchCandidatesQuery = {
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
-		} | null>;
-		nextToken?: string | null;
-		total?: number | null;
-		aggregateItems: Array<{
-			__typename: "SearchableAggregateResult";
-			name: string;
-			result:
-				| (
-						| {
-								__typename: "SearchableAggregateScalarResult";
-								value: number;
-						  }
-						| {
-								__typename: "SearchableAggregateBucketResult";
-								buckets?: Array<{
-									__typename: string;
-									key: string;
-									doc_count: number;
-								} | null> | null;
-						  }
-				  )
-				| null;
-		} | null>;
-	} | null;
-};
-
-export type SearchPostsQueryVariables = {
-	filter?: SearchablePostsFilterInput | null;
-	sort?: Array<SearchablePostsSortInput | null> | null;
-	limit?: number | null;
-	nextToken?: string | null;
-	from?: number | null;
-	aggregates?: Array<SearchablePostsAggregationInput | null> | null;
-};
-
-export type SearchPostsQuery = {
-	searchPosts?: {
-		__typename: "SearchablePostsConnection";
-		items: Array<{
-			__typename: "Posts";
-			id: string;
-			postUrl: string;
-			content: string;
-			createdAt: string;
-			updatedAt: string;
-			_version: number;
-			_deleted?: boolean | null;
-			_lastChangedAt: number;
-			candidatesPostId?: string | null;
 		} | null>;
 		nextToken?: string | null;
 		total?: number | null;

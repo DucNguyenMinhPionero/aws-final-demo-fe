@@ -62,59 +62,6 @@ export const searchCandidates = /* GraphQL */ `query SearchCandidates(
 	APITypes.SearchCandidatesQueryVariables,
 	APITypes.SearchCandidatesQuery
 >;
-export const searchPosts = /* GraphQL */ `query SearchPosts(
-  $filter: SearchablePostsFilterInput
-  $sort: [SearchablePostsSortInput]
-  $limit: Int
-  $nextToken: String
-  $from: Int
-  $aggregates: [SearchablePostsAggregationInput]
-) {
-  searchPosts(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-    from: $from
-    aggregates: $aggregates
-  ) {
-    items {
-      id
-      postUrl
-      content
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      candidatesPostId
-      __typename
-    }
-    nextToken
-    total
-    aggregateItems {
-      name
-      result {
-        ... on SearchableAggregateScalarResult {
-          value
-        }
-        ... on SearchableAggregateBucketResult {
-          buckets {
-            key
-            doc_count
-            __typename
-          }
-        }
-      }
-      __typename
-    }
-    __typename
-  }
-}
-` as GeneratedQuery<
-	APITypes.SearchPostsQueryVariables,
-	APITypes.SearchPostsQuery
->;
 export const getUsers = /* GraphQL */ `query GetUsers($id: ID!) {
   getUsers(id: $id) {
     id
