@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"crawlingappfe48b8b45e": {
+		"crawlingappfe42f1fb7a": {
 			"customAuth": false,
 			"dependsOn": [],
 			"frontendAuthConfig": {
@@ -17,6 +17,13 @@
 			},
 			"providerPlugin": "awscloudformation",
 			"service": "Cognito"
+		}
+	},
+	"storage": {
+		"s36e8ca1c7": {
+			"dependsOn": [],
+			"providerPlugin": "awscloudformation",
+			"service": "S3"
 		}
 	}
 }

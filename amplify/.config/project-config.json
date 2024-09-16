@@ -1,5 +1,4 @@
 {
-	"providers": ["awscloudformation"],
 	"projectName": "crawlingappfe",
 	"version": "3.1",
 	"frontend": "javascript",
@@ -11,5 +10,6 @@
 			"BuildCommand": "yarn build",
 			"StartCommand": "yarn start"
 		}
-	}
+	},
+	"providers": ["awscloudformation"]
 }

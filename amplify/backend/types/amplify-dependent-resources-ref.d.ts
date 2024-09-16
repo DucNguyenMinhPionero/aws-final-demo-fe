@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
 	auth: {
-		crawlingappfe48b8b45e: {
+		crawlingappfe42f1fb7a: {
 			AppClientID: "string";
 			AppClientIDWeb: "string";
 			IdentityPoolId: "string";
@@ -8,6 +8,12 @@ export type AmplifyDependentResourcesAttributes = {
 			UserPoolArn: "string";
 			UserPoolId: "string";
 			UserPoolName: "string";
+		};
+	};
+	storage: {
+		s36e8ca1c7: {
+			BucketName: "string";
+			Region: "string";
 		};
 	};
 };
