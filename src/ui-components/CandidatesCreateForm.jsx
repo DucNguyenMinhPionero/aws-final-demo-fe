@@ -49,9 +49,9 @@ export default function CandidatesCreateForm(props) {
 		setErrors({});
 	};
 	const validations = {
-		email: [{ type: "Required" }],
-		name: [{ type: "Required" }],
-		profileUrl: [{ type: "Required" }],
+		email: [],
+		name: [],
+		profileUrl: [],
 		metadata: [{ type: "JSON" }],
 		createdAt: [{ type: "Required" }],
 	};
@@ -150,7 +150,7 @@ export default function CandidatesCreateForm(props) {
 		>
 			<TextField
 				label="Email"
-				isRequired={true}
+				isRequired={false}
 				isReadOnly={false}
 				value={email}
 				onChange={(e) => {
@@ -178,7 +178,7 @@ export default function CandidatesCreateForm(props) {
 			></TextField>
 			<TextField
 				label="Name"
-				isRequired={true}
+				isRequired={false}
 				isReadOnly={false}
 				value={name}
 				onChange={(e) => {
@@ -206,7 +206,7 @@ export default function CandidatesCreateForm(props) {
 			></TextField>
 			<TextField
 				label="Profile url"
-				isRequired={true}
+				isRequired={false}
 				isReadOnly={false}
 				value={profileUrl}
 				onChange={(e) => {
