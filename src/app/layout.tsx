@@ -2,8 +2,8 @@
 
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
-import NavBar from "@/components/nav-bar";
-import SideBar from "@/components/side-bar";
+import NavBar from "@/components/common/nav-bar";
+import SideBar from "@/components/common/side-bar";
 
 import "./globals.css";
 

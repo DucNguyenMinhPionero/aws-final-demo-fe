@@ -19,3 +19,29 @@ export const SIDE_BAR_ITEMS = [
 		href: "/posts",
 	},
 ];
+
+export const MOCK_USER = [
+	{
+		username: "user-name",
+		email: "user-name@gmail.com",
+	},
+];
+
+export const MOCK_POST = [
+	{
+		id: "post-id",
+		postUrl: "post-url",
+		content: "post-content",
+		candidateId: "candidate-id",
+	},
+];
+
+export const MOCK_CANDIDATE = [
+	{
+		id: "candidate-id",
+		name: "candidate-name",
+		email: "candidate@gmail.com",
+		profileUrl: "candidate-url",
+		postId: "post-id",
+	},
+];
