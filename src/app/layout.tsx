@@ -1,13 +1,8 @@
-"use client";
-
-import { withAuthenticator } from "@aws-amplify/ui-react";
-
-import NavBar from "@/components/common/nav-bar";
-import SideBar from "@/components/common/side-bar";
+import Body from "@/components/common/body";
 
 import "./globals.css";
 
-function RootLayout({
+export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
@@ -15,14 +10,8 @@ function RootLayout({
 	return (
 		<html lang="en">
 			<body>
-				<NavBar />
-				<SideBar />
-				<div className="p-4 sm:ml-64">
-					<div className="mt-14">{children}</div>
-				</div>
+				<Body children={children} />
 			</body>
 		</html>
 	);
 }
-
-export default withAuthenticator(RootLayout);

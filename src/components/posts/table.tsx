@@ -1,8 +1,14 @@
+import clsx from "clsx";
 import Link from "next/link";
+import { useState } from "react";
 
 import { MOCK_POST } from "@/app/libs/constant";
+import Spinner from "../common/spinner";
 
 export default function PostTable() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [isLoading, setLoading] = useState(false);
+
 	return (
 		<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 			<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -24,7 +30,7 @@ export default function PostTable() {
 					</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody className={clsx(isLoading ? "opacity-20" : "")}>
 				{MOCK_POST.map((item, index) => (
 					<tr
 						key={index}
@@ -57,6 +63,7 @@ export default function PostTable() {
 					</tr>
 				))}
 			</tbody>
+			{isLoading && <Spinner />}
 		</table>
 	);
 }
