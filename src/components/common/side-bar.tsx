@@ -2,12 +2,16 @@
 
 import clsx from "clsx";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { SIDE_BAR_ITEMS } from "@/app/libs/constant";
+import CloseSvg from "@/app/libs/svg/close-svg";
 
 export default function SideBar() {
 	const [isCloseBeta, setCloseBeta] = useState(false);
+
+	const path = usePathname();
 
 	return (
 		<aside className="fixed top-0 left-0 z-40 w-64 h-screen pt-16 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700">
@@ -17,7 +21,10 @@ export default function SideBar() {
 						<li key={`${index}-${item.name}`}>
 							<Link
 								href={item.href}
-								className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+								className={clsx(
+									"flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group",
+									path === item.href ? "bg-gray-700" : "",
+								)}
 							>
 								{item.icon}
 								<span className="ms-3">{item.name}</span>
@@ -45,21 +52,7 @@ export default function SideBar() {
 							onClick={() => setCloseBeta(true)}
 						>
 							<span className="sr-only">Close</span>
-							<svg
-								className="w-2.5 h-2.5"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 14 14"
-							>
-								<path
-									stroke="currentColor"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-								/>
-							</svg>
+							<CloseSvg />
 						</button>
 					</div>
 					<p className="mb-3 text-sm text-blue-800 dark:text-blue-400">

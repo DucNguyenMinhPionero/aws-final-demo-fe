@@ -32,6 +32,7 @@
     "jsx-a11y/label-has-associated-control": "off",
     "react/no-array-index-key": "off",
     "react/no-children-prop": "off",
+    "import/no-cycle": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

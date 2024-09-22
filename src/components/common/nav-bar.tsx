@@ -19,11 +19,7 @@ function NavBar({ user }: WithAuthenticatorProps) {
 					<div className="flex items-center justify-between">
 						{/* Company Icon */}
 						<div className="flex items-center justify-start rtl:justify-end">
-							<Link
-								href="https://www.pionero.io/"
-								className="flex ms-2 md:me-24"
-								target="_blank"
-							>
+							<Link href="/" className="flex ms-2 md:me-24">
 								<Image
 									src="/pionero.jpeg"
 									width={40}

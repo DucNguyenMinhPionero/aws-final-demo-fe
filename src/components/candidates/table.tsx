@@ -1,11 +1,16 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
+import { ModalInfo } from "@/app/candidates/page";
 import { MOCK_CANDIDATE } from "@/app/libs/constant";
 import Spinner from "../common/spinner";
 
-export default function CandidateTable() {
+type CandidateTableProps = {
+	setModalInfo: Dispatch<SetStateAction<ModalInfo>>;
+};
+
+export default function CandidateTable({ setModalInfo }: CandidateTableProps) {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [isLoading, setLoading] = useState(false);
 
@@ -57,12 +62,20 @@ export default function CandidateTable() {
 						</td>
 						<td className="px-6 py-4">{item.postId}</td>
 						<td className="px-6 py-4">
-							<Link
-								href={`/candidates/${item.id}`}
+							<p
+								onClick={() =>
+									setModalInfo({
+										isOpen: true,
+										id: item.id,
+										name: item.name,
+										email: item.email,
+										profileUrl: item.profileUrl,
+									})
+								}
 								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
 							>
 								Edit
-							</Link>
+							</p>
 						</td>
 					</tr>
 				))}

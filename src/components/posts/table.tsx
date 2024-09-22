@@ -1,11 +1,16 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import { MOCK_POST } from "@/app/libs/constant";
+import { type ModalInfo } from "@/app/posts/page";
 import Spinner from "../common/spinner";
 
-export default function PostTable() {
+type PostTableProps = {
+	setModalInfo: Dispatch<SetStateAction<ModalInfo>>;
+};
+
+export default function PostTable({ setModalInfo }: PostTableProps) {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [isLoading, setLoading] = useState(false);
 
@@ -53,12 +58,19 @@ export default function PostTable() {
 						</td>
 						<td className="px-6 py-4">{item.candidateId}</td>
 						<td className="px-6 py-4">
-							<Link
-								href={`/posts/${item.id}`}
+							<p
+								onClick={() =>
+									setModalInfo({
+										isOpen: true,
+										id: item.id,
+										content: item.content,
+										postUrl: item.postUrl,
+									})
+								}
 								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
 							>
 								Edit
-							</Link>
+							</p>
 						</td>
 					</tr>
 				))}

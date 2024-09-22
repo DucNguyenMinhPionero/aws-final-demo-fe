@@ -1,8 +1,15 @@
 import CandidateSvg from "./svg/candidate-svg";
+import EmailSvg from "./svg/email-svg";
 import PostSvg from "./svg/post-svg";
 import UserSvg from "./svg/user-svg";
 
-export const SIDE_BAR_ITEMS = [
+type SideBarProps = {
+	name: string;
+	icon: JSX.Element;
+	href: string;
+};
+
+export const SIDE_BAR_ITEMS: SideBarProps[] = [
 	{
 		name: "Users",
 		icon: <UserSvg />,
@@ -17,6 +24,11 @@ export const SIDE_BAR_ITEMS = [
 		name: "Posts",
 		icon: <PostSvg />,
 		href: "/posts",
+	},
+	{
+		name: "Email & Crawling",
+		icon: <EmailSvg />,
+		href: "/email",
 	},
 ];
 
