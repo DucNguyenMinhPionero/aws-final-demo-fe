@@ -31,10 +31,7 @@ const awsmobile = {
         "EMAIL"
     ],
     "aws_user_files_s3_bucket": "crawlingappfe1923e8a8c2f84f2b8df6d1b9e1e367c2683f8-dev",
-    "aws_user_files_s3_bucket_region": "ap-northeast-1",
-    "aws_appsync_graphqlEndpoint": "https://ojitbkvql5hqvisec2nmfxhdou.appsync-api.ap-northeast-1.amazonaws.com/graphql",
-    "aws_appsync_region": "ap-northeast-1",
-    "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS"
+    "aws_user_files_s3_bucket_region": "ap-northeast-1"
 };
 
 

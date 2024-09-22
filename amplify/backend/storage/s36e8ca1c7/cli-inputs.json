@@ -1,0 +1,10 @@
+{
+	"resourceName": "s36e8ca1c7",
+	"policyUUID": "6e8ca1c7",
+	"bucketName": "crawlingappfe1923e8a8c2f84f2b8df6d1b9e1e367c2",
+	"storageAccess": "auth",
+	"guestAccess": [],
+	"authAccess": ["CREATE_AND_UPDATE", "READ"],
+	"triggerFunction": "NONE",
+	"groupAccess": {}
+}
