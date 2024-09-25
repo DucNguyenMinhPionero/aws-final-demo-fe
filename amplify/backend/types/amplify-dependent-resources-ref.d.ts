@@ -17,6 +17,28 @@ export type AmplifyDependentResourcesAttributes = {
 			UserPoolName: "string";
 		};
 	};
+	function: {
+		crawling: {
+			Arn: "string";
+			LambdaExecutionRole: "string";
+			Name: "string";
+			Region: "string";
+		};
+		sendMailToSES: {
+			Arn: "string";
+			LambdaExecutionRole: "string";
+			LambdaExecutionRoleArn: "string";
+			Name: "string";
+			Region: "string";
+		};
+		sendMailsToSQS: {
+			Arn: "string";
+			LambdaExecutionRole: "string";
+			LambdaExecutionRoleArn: "string";
+			Name: "string";
+			Region: "string";
+		};
+	};
 	storage: {
 		s36e8ca1c7: {
 			BucketName: "string";

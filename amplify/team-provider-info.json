@@ -18,6 +18,20 @@
 			"auth": {
 				"crawlingappfe42f1fb7a": {}
 			},
+			"function": {
+				"sendMailToSES": {
+					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
+					"s3Key": "amplify-builds/sendMailToSES-565a386843706369474d-build.zip"
+				},
+				"sendMailsToSQS": {
+					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
+					"s3Key": "amplify-builds/sendMailsToSQS-57764c3854686f2b4a46-build.zip"
+				},
+				"crawling": {
+					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
+					"s3Key": "amplify-builds/crawling-64317331564864794739-build.zip"
+				}
+			},
 			"storage": {
 				"s36e8ca1c7": {}
 			}
