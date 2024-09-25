@@ -14,6 +14,7 @@ import Pagination from "@/components/common/pagination";
 import { listCandidates } from "@/graphql/queries";
 import config from "../../amplifyconfiguration.json";
 import { MOCK_USER } from "../libs/constant";
+import { Candidate } from "../libs/type";
 
 import "react-toastify/dist/ReactToastify.css";
 import "@aws-amplify/ui-react/styles.css";
@@ -23,36 +24,43 @@ Amplify.configure(config);
 export type ModalInfo = {
 	isOpen: boolean;
 	id?: string;
-	name?: string;
-	email?: string;
-	profileUrl?: string;
+	name?: string | null;
+	email?: string | null;
+	profileUrl?: string | null;
+	metadata?: string | null;
 };
 
 function CandidatePage() {
+	// state
 	const [modalInfo, setModalInfo] = useState<ModalInfo>({
 		isOpen: false,
 		id: undefined,
 		name: undefined,
 		email: undefined,
 		profileUrl: undefined,
+		metadata: undefined,
 	});
+	const [candidates, setCandidates] = useState<Candidate[]>([]);
 
+	// other variables
 	const API = generateClient();
 
+	// useEffect group
 	useEffect(() => {
 		async function getListCandidate() {
 			try {
-				await API.graphql({
+				const res = await API.graphql({
 					query: listCandidates,
-					authMode: "apiKey",
 				});
+
+				setCandidates(res.data.listCandidates.items);
 			} catch (err) {
 				toast.error((err as Error).message);
 			}
 		}
 
 		getListCandidate();
-	}, [API]);
+	}, []);
 
 	return (
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -61,7 +69,7 @@ function CandidatePage() {
 					<CandidateSearch />
 				</div>
 				{/* table */}
-				<CandidateTable setModalInfo={setModalInfo} />
+				<CandidateTable candidates={candidates} setModalInfo={setModalInfo} />
 				<Pagination
 					totalItems={MOCK_USER.length}
 					itemsPerPage={10}

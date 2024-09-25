@@ -47,13 +47,3 @@ export const MOCK_POST = [
 		candidateId: "candidate-id",
 	},
 ];
-
-export const MOCK_CANDIDATE = [
-	{
-		id: "candidate-id",
-		name: "candidate-name",
-		email: "candidate@gmail.com",
-		profileUrl: "candidate-url",
-		postId: "post-id",
-	},
-];

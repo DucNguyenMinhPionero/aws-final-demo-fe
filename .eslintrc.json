@@ -34,6 +34,7 @@
     "react/no-children-prop": "off",
     "import/no-cycle": "off",
     "import/no-extraneous-dependencies": "off",
+    "react-hooks/exhaustive-deps": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
