@@ -49,8 +49,8 @@ export default function PostsUpdateForm(props) {
 	}, [idProp, postsModelProp]);
 	React.useEffect(resetStateValues, [postsRecord]);
 	const validations = {
-		postUrl: [{ type: "Required" }],
-		content: [{ type: "Required" }],
+		postUrl: [],
+		content: [],
 	};
 	const runValidationTasks = async (
 		fieldName,
@@ -128,7 +128,7 @@ export default function PostsUpdateForm(props) {
 		>
 			<TextField
 				label="Post url"
-				isRequired={true}
+				isRequired={false}
 				isReadOnly={false}
 				value={postUrl}
 				onChange={(e) => {
@@ -153,7 +153,7 @@ export default function PostsUpdateForm(props) {
 			></TextField>
 			<TextField
 				label="Content"
-				isRequired={true}
+				isRequired={false}
 				isReadOnly={false}
 				value={content}
 				onChange={(e) => {

@@ -71,21 +71,21 @@ export const schema = {
 					name: "email",
 					isArray: false,
 					type: "String",
-					isRequired: true,
+					isRequired: false,
 					attributes: [],
 				},
 				name: {
 					name: "name",
 					isArray: false,
 					type: "String",
-					isRequired: true,
+					isRequired: false,
 					attributes: [],
 				},
 				profileUrl: {
 					name: "profileUrl",
 					isArray: false,
 					type: "String",
-					isRequired: true,
+					isRequired: false,
 					attributes: [],
 				},
 				metadata: {
@@ -138,14 +138,14 @@ export const schema = {
 					name: "postUrl",
 					isArray: false,
 					type: "String",
-					isRequired: true,
+					isRequired: false,
 					attributes: [],
 				},
 				content: {
 					name: "content",
 					isArray: false,
 					type: "String",
-					isRequired: true,
+					isRequired: false,
 					attributes: [],
 				},
 				candidate: {
@@ -198,5 +198,5 @@ export const schema = {
 	enums: {},
 	nonModels: {},
 	codegenVersion: "3.4.4",
-	version: "9220b64680caeff35b0c6ccab0862e91",
+	version: "f254ad3ca5d5fcba40556bb18c210746",
 };

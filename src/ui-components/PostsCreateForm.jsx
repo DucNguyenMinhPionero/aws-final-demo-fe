@@ -34,8 +34,8 @@ export default function PostsCreateForm(props) {
 		setErrors({});
 	};
 	const validations = {
-		postUrl: [{ type: "Required" }],
-		content: [{ type: "Required" }],
+		postUrl: [],
+		content: [],
 	};
 	const runValidationTasks = async (
 		fieldName,
@@ -112,7 +112,7 @@ export default function PostsCreateForm(props) {
 		>
 			<TextField
 				label="Post url"
-				isRequired={true}
+				isRequired={false}
 				isReadOnly={false}
 				value={postUrl}
 				onChange={(e) => {
@@ -137,7 +137,7 @@ export default function PostsCreateForm(props) {
 			></TextField>
 			<TextField
 				label="Content"
-				isRequired={true}
+				isRequired={false}
 				isReadOnly={false}
 				value={content}
 				onChange={(e) => {

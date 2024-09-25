@@ -52,9 +52,9 @@ type EagerCandidates = {
 	};
 	readonly id: string;
 	readonly post?: (Posts | null)[] | null;
-	readonly email: string;
-	readonly name: string;
-	readonly profileUrl: string;
+	readonly email?: string | null;
+	readonly name?: string | null;
+	readonly profileUrl?: string | null;
 	readonly metadata?: string | null;
 	readonly createdAt: string;
 	readonly updatedAt?: string | null;
@@ -67,9 +67,9 @@ type LazyCandidates = {
 	};
 	readonly id: string;
 	readonly post: AsyncCollection<Posts>;
-	readonly email: string;
-	readonly name: string;
-	readonly profileUrl: string;
+	readonly email?: string | null;
+	readonly name?: string | null;
+	readonly profileUrl?: string | null;
 	readonly metadata?: string | null;
 	readonly createdAt: string;
 	readonly updatedAt?: string | null;
@@ -96,8 +96,8 @@ type EagerPosts = {
 		readOnlyFields: "createdAt" | "updatedAt";
 	};
 	readonly id: string;
-	readonly postUrl: string;
-	readonly content: string;
+	readonly postUrl?: string | null;
+	readonly content?: string | null;
 	readonly candidate?: Candidates | null;
 	readonly createdAt?: string | null;
 	readonly updatedAt?: string | null;
@@ -110,8 +110,8 @@ type LazyPosts = {
 		readOnlyFields: "createdAt" | "updatedAt";
 	};
 	readonly id: string;
-	readonly postUrl: string;
-	readonly content: string;
+	readonly postUrl?: string | null;
+	readonly content?: string | null;
 	readonly candidate: AsyncItem<Candidates | undefined>;
 	readonly createdAt?: string | null;
 	readonly updatedAt?: string | null;

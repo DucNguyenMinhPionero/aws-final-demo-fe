@@ -10,17 +10,17 @@ type Users @model {
 type Candidates @model @searchable {
   id: ID!
   post: [Posts] @hasMany
-  email: String!
-  name: String!
-  profileUrl: String!
+  email: String
+  name: String
+  profileUrl: String
   metadata: AWSJSON
   createdAt: AWSDateTime!
 }
 
 type Posts @model {
   id: ID!
-  postUrl: String!
-  content: String!
+  postUrl: String
+  content: String
   candidate: Candidates @belongsTo
 }
 

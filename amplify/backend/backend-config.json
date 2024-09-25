@@ -52,6 +52,73 @@
 			"service": "Cognito"
 		}
 	},
+	"function": {
+		"crawling": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		},
+		"sendMailToSES": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		},
+		"sendMailsToSQS": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		}
+	},
+	"parameters": {
+		"AMPLIFY_function_crawling_deploymentBucketName": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "crawling"
+				}
+			]
+		},
+		"AMPLIFY_function_crawling_s3Key": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "crawling"
+				}
+			]
+		},
+		"AMPLIFY_function_sendMailToSES_deploymentBucketName": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "sendMailToSES"
+				}
+			]
+		},
+		"AMPLIFY_function_sendMailToSES_s3Key": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "sendMailToSES"
+				}
+			]
+		},
+		"AMPLIFY_function_sendMailsToSQS_deploymentBucketName": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "sendMailsToSQS"
+				}
+			]
+		},
+		"AMPLIFY_function_sendMailsToSQS_s3Key": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "sendMailsToSQS"
+				}
+			]
+		}
+	},
 	"storage": {
 		"s36e8ca1c7": {
 			"dependsOn": [],

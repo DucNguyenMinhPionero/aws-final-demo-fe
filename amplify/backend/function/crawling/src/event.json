@@ -1,0 +1,8 @@
+{
+	"httpMethod": "GET",
+	"path": "/item",
+	"headers": {
+		"Content-Type": "application/json"
+	},
+	"body": "{\"topic\":\"express\", \"total\" : 5}"
+}
