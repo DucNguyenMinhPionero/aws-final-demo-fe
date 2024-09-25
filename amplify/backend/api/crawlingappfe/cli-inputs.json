@@ -4,8 +4,10 @@
 		"apiName": "crawlingappfe",
 		"serviceName": "AppSync",
 		"defaultAuthType": {
-			"mode": "AMAZON_COGNITO_USER_POOLS",
-			"cognitoUserPoolId": "authcrawlingappfe42f1fb7a"
+			"mode": "API_KEY",
+			"expirationTime": 100,
+			"apiKeyExpirationDate": "2025-01-03T08:47:22.213Z",
+			"keyDescription": ""
 		},
 		"conflictResolution": {
 			"defaultResolutionStrategy": {
@@ -14,10 +16,7 @@
 		},
 		"additionalAuthTypes": [
 			{
-				"mode": "API_KEY",
-				"expirationTime": 30,
-				"apiKeyExpirationDate": "2024-10-16T07:57:22.150Z",
-				"keyDescription": ""
+				"mode": "AWS_IAM"
 			}
 		]
 	}

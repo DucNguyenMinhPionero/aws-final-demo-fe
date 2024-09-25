@@ -12,9 +12,6 @@
 			"AmplifyAppId": "d96kqscet2lox"
 		},
 		"categories": {
-			"api": {
-				"crawlingappfe": {}
-			},
 			"auth": {
 				"crawlingappfe42f1fb7a": {}
 			},
@@ -34,6 +31,9 @@
 			},
 			"storage": {
 				"s36e8ca1c7": {}
+			},
+			"api": {
+				"crawlingappfe": {}
 			}
 		}
 	}

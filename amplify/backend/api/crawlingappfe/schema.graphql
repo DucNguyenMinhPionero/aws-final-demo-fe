@@ -2,12 +2,12 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type Users @model {
+type Users @model @aws_api_key {
   id: ID!
   email: String!
 }
 
-type Candidates @model @searchable {
+type Candidates @model @searchable @aws_api_key {
   id: ID!
   post: [Posts] @hasMany
   email: String
@@ -17,7 +17,7 @@ type Candidates @model @searchable {
   createdAt: AWSDateTime!
 }
 
-type Posts @model {
+type Posts @model @aws_api_key {
   id: ID!
   postUrl: String
   content: String

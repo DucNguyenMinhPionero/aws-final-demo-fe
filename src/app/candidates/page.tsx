@@ -2,16 +2,20 @@
 
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
+import { generateClient } from "aws-amplify/api";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 import CandidateEditModal from "@/components/candidates/edit";
 import CandidateSearch from "@/components/candidates/search";
 import CandidateTable from "@/components/candidates/table";
 import Pagination from "@/components/common/pagination";
+import { listCandidates } from "@/graphql/queries";
 import config from "../../amplifyconfiguration.json";
 import { MOCK_USER } from "../libs/constant";
 
+import "react-toastify/dist/ReactToastify.css";
 import "@aws-amplify/ui-react/styles.css";
 
 Amplify.configure(config);
@@ -33,6 +37,23 @@ function CandidatePage() {
 		profileUrl: undefined,
 	});
 
+	const API = generateClient();
+
+	useEffect(() => {
+		async function getListCandidate() {
+			try {
+				await API.graphql({
+					query: listCandidates,
+					authMode: "apiKey",
+				});
+			} catch (err) {
+				toast.error((err as Error).message);
+			}
+		}
+
+		getListCandidate();
+	}, [API]);
+
 	return (
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
 			<div className={clsx(modalInfo.isOpen ? "blur" : "")}>
@@ -51,6 +72,7 @@ function CandidatePage() {
 			{/* search */}
 			{/* edit modal */}
 			<CandidateEditModal setModalInfo={setModalInfo} modalInfo={modalInfo} />
+			<ToastContainer />
 		</div>
 	);
 }
