@@ -13,7 +13,6 @@ import PostSearch from "@/components/posts/search";
 import PostTable from "@/components/posts/table";
 import { listPosts } from "@/graphql/queries";
 import config from "../../amplifyconfiguration.json";
-import { MOCK_POST } from "../libs/constant";
 import { Post } from "../libs/type";
 
 import "@aws-amplify/ui-react/styles.css";
@@ -69,7 +68,7 @@ function PostPage() {
 				{/* table */}
 				<PostTable posts={posts} setModalInfo={setModalInfo} />
 				<Pagination
-					totalItems={MOCK_POST.length}
+					totalItems={posts.length}
 					itemsPerPage={10}
 					isCurrentPage
 					currentPage={1}

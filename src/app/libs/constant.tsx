@@ -31,19 +31,3 @@ export const SIDE_BAR_ITEMS: SideBarProps[] = [
 		href: "/email",
 	},
 ];
-
-export const MOCK_USER = [
-	{
-		username: "user-name",
-		email: "user-name@gmail.com",
-	},
-];
-
-export const MOCK_POST = [
-	{
-		id: "post-id",
-		postUrl: "post-url",
-		content: "post-content",
-		candidateId: "candidate-id",
-	},
-];

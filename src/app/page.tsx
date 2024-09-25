@@ -2,18 +2,51 @@
 
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
+import { generateClient } from "aws-amplify/api";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import Pagination from "@/components/common/pagination";
 import UserSearch from "@/components/users/search";
 import UserTable from "@/components/users/table";
-import { MOCK_USER } from "./libs/constant";
+import { listUsers } from "@/graphql/queries";
+import { User } from "./libs/type";
 import config from "../amplifyconfiguration.json";
 
 import "@aws-amplify/ui-react/styles.css";
 
 Amplify.configure(config);
 
+export type ModalInfo = {
+	isOpen: boolean;
+	id?: string;
+	email?: string | null;
+};
+
 function Home() {
+	// state
+	const [users, setUsers] = useState<User[]>([]);
+
+	// other variables
+	const API = generateClient();
+
+	// useEffect group
+	useEffect(() => {
+		async function getListCandidate() {
+			try {
+				const res = await API.graphql({
+					query: listUsers,
+				});
+
+				setUsers(res.data.listUsers.items);
+			} catch (err) {
+				toast.error((err as Error).message);
+			}
+		}
+
+		getListCandidate();
+	}, []);
+
 	return (
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
 			{/* search */}
@@ -21,9 +54,9 @@ function Home() {
 				<UserSearch />
 			</div>
 			{/* table */}
-			<UserTable />
+			<UserTable users={users} />
 			<Pagination
-				totalItems={MOCK_USER.length}
+				totalItems={users.length}
 				itemsPerPage={10}
 				isCurrentPage
 				currentPage={1}

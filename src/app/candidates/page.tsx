@@ -13,7 +13,6 @@ import CandidateTable from "@/components/candidates/table";
 import Pagination from "@/components/common/pagination";
 import { listCandidates } from "@/graphql/queries";
 import config from "../../amplifyconfiguration.json";
-import { MOCK_USER } from "../libs/constant";
 import { Candidate } from "../libs/type";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -71,7 +70,7 @@ function CandidatePage() {
 				{/* table */}
 				<CandidateTable candidates={candidates} setModalInfo={setModalInfo} />
 				<Pagination
-					totalItems={MOCK_USER.length}
+					totalItems={candidates.length}
 					itemsPerPage={10}
 					isCurrentPage
 					currentPage={1}
