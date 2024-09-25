@@ -41,6 +41,10 @@ export const schema = {
 					type: "model",
 					properties: {},
 				},
+				{
+					type: "aws_api_key",
+					properties: {},
+				},
 			],
 		},
 		Candidates: {
@@ -122,6 +126,10 @@ export const schema = {
 					type: "searchable",
 					properties: {},
 				},
+				{
+					type: "aws_api_key",
+					properties: {},
+				},
 			],
 		},
 		Posts: {
@@ -190,6 +198,10 @@ export const schema = {
 			attributes: [
 				{
 					type: "model",
+					properties: {},
+				},
+				{
+					type: "aws_api_key",
 					properties: {},
 				},
 			],

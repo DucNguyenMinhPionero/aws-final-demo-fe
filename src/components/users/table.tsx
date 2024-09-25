@@ -10,7 +10,12 @@ export default function UserTable() {
 
 	return (
 		<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-			<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+			<thead
+				className={clsx(
+					"text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400",
+					isLoading ? "opacity-40" : "",
+				)}
+			>
 				<tr>
 					<th scope="col" className="px-6 py-3">
 						User Name
@@ -20,7 +25,7 @@ export default function UserTable() {
 					</th>
 				</tr>
 			</thead>
-			<tbody className={clsx(isLoading ? "opacity-20" : "")}>
+			<tbody className={clsx(isLoading ? "opacity-40" : "")}>
 				{MOCK_USER.map((item, index) => (
 					<tr
 						key={index}

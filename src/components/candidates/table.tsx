@@ -16,7 +16,12 @@ export default function CandidateTable({ setModalInfo }: CandidateTableProps) {
 
 	return (
 		<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-			<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+			<thead
+				className={clsx(
+					"text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400",
+					isLoading ? "opacity-40" : "",
+				)}
+			>
 				<tr>
 					<th scope="col" className="px-6 py-3">
 						ID
@@ -38,7 +43,7 @@ export default function CandidateTable({ setModalInfo }: CandidateTableProps) {
 					</th>
 				</tr>
 			</thead>
-			<tbody className={clsx(isLoading ? "opacity-20" : "")}>
+			<tbody className={clsx(isLoading ? "opacity-40" : "")}>
 				{MOCK_CANDIDATE.map((item, index) => (
 					<tr
 						key={index}
