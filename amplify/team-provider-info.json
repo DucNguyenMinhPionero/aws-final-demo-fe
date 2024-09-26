@@ -13,18 +13,13 @@
 			"AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-crawlingappfe-dev-683f8-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
 		},
 		"categories": {
+			"api": {
+				"crawlingappfe": {}
+			},
 			"auth": {
 				"crawlingappfe42f1fb7a": {}
 			},
 			"function": {
-				"sendMailToSES": {
-					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
-					"s3Key": "amplify-builds/sendMailToSES-565a386843706369474d-build.zip"
-				},
-				"sendMailsToSQS": {
-					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
-					"s3Key": "amplify-builds/sendMailsToSQS-57764c3854686f2b4a46-build.zip"
-				},
 				"crawling": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
 					"s3Key": "amplify-builds/crawling-414e4f71786f61462f33-build.zip"
@@ -32,14 +27,18 @@
 				"crawlingappfe42f1fb7aPreSignup": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
 					"s3Key": "amplify-builds/crawlingappfe42f1fb7aPreSignup-34736162394a56304643-build.zip"
+				},
+				"sendMailToSES": {
+					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
+					"s3Key": "amplify-builds/sendMailToSES-565a386843706369474d-build.zip"
+				},
+				"sendMailsToSQS": {
+					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
+					"s3Key": "amplify-builds/sendMailsToSQS-57764c3854686f2b4a46-build.zip"
 				}
 			},
 			"storage": {
 				"s36e8ca1c7": {}
-			},
-			"api": {
-				"crawlingappfe": {},
-				"crawling": {}
 			}
 		}
 	}

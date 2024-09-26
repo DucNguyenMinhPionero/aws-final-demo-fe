@@ -2,7 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../../amplify/backend/function/crawlingappfe42f1fb7aPreSignup/src/src/API";
+import * as APITypes from "../API";
 type GeneratedMutation<InputType, OutputType> = string & {
 	__generatedMutationInput: InputType;
 	__generatedMutationOutput: OutputType;
@@ -14,6 +14,7 @@ export const createUsers = /* GraphQL */ `mutation CreateUsers(
 ) {
   createUsers(input: $input, condition: $condition) {
     id
+    userName
     email
     createdAt
     updatedAt
@@ -33,6 +34,7 @@ export const updateUsers = /* GraphQL */ `mutation UpdateUsers(
 ) {
   updateUsers(input: $input, condition: $condition) {
     id
+    userName
     email
     createdAt
     updatedAt
@@ -52,6 +54,7 @@ export const deleteUsers = /* GraphQL */ `mutation DeleteUsers(
 ) {
   deleteUsers(input: $input, condition: $condition) {
     id
+    userName
     email
     createdAt
     updatedAt

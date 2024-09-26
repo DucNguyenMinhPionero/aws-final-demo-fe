@@ -26,16 +26,25 @@ export declare type ValidationFunction<T> = (
 	validationResponse: ValidationResponse,
 ) => ValidationResponse | Promise<ValidationResponse>;
 export declare type UsersUpdateFormInputValues = {
+	userName?: string;
 	email?: string;
+	createdAt?: string;
+	updatedAt?: string;
 };
 export declare type UsersUpdateFormValidationValues = {
+	userName?: ValidationFunction<string>;
 	email?: ValidationFunction<string>;
+	createdAt?: ValidationFunction<string>;
+	updatedAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> &
 	React.DOMAttributes<HTMLDivElement>;
 export declare type UsersUpdateFormOverridesProps = {
 	UsersUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
+	userName?: PrimitiveOverrideProps<TextFieldProps>;
 	email?: PrimitiveOverrideProps<TextFieldProps>;
+	createdAt?: PrimitiveOverrideProps<TextFieldProps>;
+	updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type UsersUpdateFormProps = React.PropsWithChildren<
 	{

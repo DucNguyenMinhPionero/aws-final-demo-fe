@@ -28,10 +28,14 @@ export declare type ValidationFunction<T> = (
 export declare type PostsUpdateFormInputValues = {
 	postUrl?: string;
 	content?: string;
+	createdAt?: string;
+	updatedAt?: string;
 };
 export declare type PostsUpdateFormValidationValues = {
 	postUrl?: ValidationFunction<string>;
 	content?: ValidationFunction<string>;
+	createdAt?: ValidationFunction<string>;
+	updatedAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> &
 	React.DOMAttributes<HTMLDivElement>;
@@ -39,6 +43,8 @@ export declare type PostsUpdateFormOverridesProps = {
 	PostsUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
 	postUrl?: PrimitiveOverrideProps<TextFieldProps>;
 	content?: PrimitiveOverrideProps<TextFieldProps>;
+	createdAt?: PrimitiveOverrideProps<TextFieldProps>;
+	updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type PostsUpdateFormProps = React.PropsWithChildren<
 	{

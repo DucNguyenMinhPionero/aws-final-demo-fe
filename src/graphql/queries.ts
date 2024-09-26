@@ -2,7 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../../amplify/backend/function/crawlingappfe42f1fb7aPreSignup/src/src/API";
+import * as APITypes from "../API";
 type GeneratedQuery<InputType, OutputType> = string & {
 	__generatedQueryInput: InputType;
 	__generatedQueryOutput: OutputType;
@@ -65,6 +65,7 @@ export const searchCandidates = /* GraphQL */ `query SearchCandidates(
 export const getUsers = /* GraphQL */ `query GetUsers($id: ID!) {
   getUsers(id: $id) {
     id
+    userName
     email
     createdAt
     updatedAt
@@ -83,6 +84,7 @@ export const listUsers = /* GraphQL */ `query ListUsers(
   listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      userName
       email
       createdAt
       updatedAt
@@ -111,6 +113,7 @@ export const syncUsers = /* GraphQL */ `query SyncUsers(
   ) {
     items {
       id
+      userName
       email
       createdAt
       updatedAt

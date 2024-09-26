@@ -4,18 +4,22 @@
 
 export type CreateUsersInput = {
 	id?: string | null;
+	userName: string;
 	email: string;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version?: number | null;
 };
 
 export type ModelUsersConditionInput = {
+	userName?: ModelStringInput | null;
 	email?: ModelStringInput | null;
+	createdAt?: ModelStringInput | null;
+	updatedAt?: ModelStringInput | null;
 	and?: Array<ModelUsersConditionInput | null> | null;
 	or?: Array<ModelUsersConditionInput | null> | null;
 	not?: ModelUsersConditionInput | null;
 	_deleted?: ModelBooleanInput | null;
-	createdAt?: ModelStringInput | null;
-	updatedAt?: ModelStringInput | null;
 };
 
 export type ModelStringInput = {
@@ -67,9 +71,10 @@ export type ModelBooleanInput = {
 export type Users = {
 	__typename: "Users";
 	id: string;
+	userName: string;
 	email: string;
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version: number;
 	_deleted?: boolean | null;
 	_lastChangedAt: number;
@@ -77,7 +82,10 @@ export type Users = {
 
 export type UpdateUsersInput = {
 	id: string;
+	userName?: string | null;
 	email?: string | null;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version?: number | null;
 };
 
@@ -92,6 +100,8 @@ export type CreateCandidatesInput = {
 	name?: string | null;
 	profileUrl?: string | null;
 	metadata?: string | null;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version?: number | null;
 };
 
@@ -100,12 +110,12 @@ export type ModelCandidatesConditionInput = {
 	name?: ModelStringInput | null;
 	profileUrl?: ModelStringInput | null;
 	metadata?: ModelStringInput | null;
+	createdAt?: ModelStringInput | null;
+	updatedAt?: ModelStringInput | null;
 	and?: Array<ModelCandidatesConditionInput | null> | null;
 	or?: Array<ModelCandidatesConditionInput | null> | null;
 	not?: ModelCandidatesConditionInput | null;
 	_deleted?: ModelBooleanInput | null;
-	createdAt?: ModelStringInput | null;
-	updatedAt?: ModelStringInput | null;
 };
 
 export type Candidates = {
@@ -116,8 +126,8 @@ export type Candidates = {
 	name?: string | null;
 	profileUrl?: string | null;
 	metadata?: string | null;
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version: number;
 	_deleted?: boolean | null;
 	_lastChangedAt: number;
@@ -136,8 +146,8 @@ export type Posts = {
 	postUrl?: string | null;
 	content?: string | null;
 	candidate?: Candidates | null;
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version: number;
 	_deleted?: boolean | null;
 	_lastChangedAt: number;
@@ -150,6 +160,8 @@ export type UpdateCandidatesInput = {
 	name?: string | null;
 	profileUrl?: string | null;
 	metadata?: string | null;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version?: number | null;
 };
 
@@ -162,6 +174,8 @@ export type CreatePostsInput = {
 	id?: string | null;
 	postUrl?: string | null;
 	content?: string | null;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version?: number | null;
 	candidatesPostId?: string | null;
 };
@@ -169,12 +183,12 @@ export type CreatePostsInput = {
 export type ModelPostsConditionInput = {
 	postUrl?: ModelStringInput | null;
 	content?: ModelStringInput | null;
+	createdAt?: ModelStringInput | null;
+	updatedAt?: ModelStringInput | null;
 	and?: Array<ModelPostsConditionInput | null> | null;
 	or?: Array<ModelPostsConditionInput | null> | null;
 	not?: ModelPostsConditionInput | null;
 	_deleted?: ModelBooleanInput | null;
-	createdAt?: ModelStringInput | null;
-	updatedAt?: ModelStringInput | null;
 	candidatesPostId?: ModelIDInput | null;
 };
 
@@ -198,6 +212,8 @@ export type UpdatePostsInput = {
 	id: string;
 	postUrl?: string | null;
 	content?: string | null;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version?: number | null;
 	candidatesPostId?: string | null;
 };
@@ -359,6 +375,7 @@ export type SearchableAggregateBucketResultItem = {
 
 export type ModelUsersFilterInput = {
 	id?: ModelIDInput | null;
+	userName?: ModelStringInput | null;
 	email?: ModelStringInput | null;
 	createdAt?: ModelStringInput | null;
 	updatedAt?: ModelStringInput | null;
@@ -411,6 +428,7 @@ export type ModelPostsFilterInput = {
 
 export type ModelSubscriptionUsersFilterInput = {
 	id?: ModelSubscriptionIDInput | null;
+	userName?: ModelSubscriptionStringInput | null;
 	email?: ModelSubscriptionStringInput | null;
 	createdAt?: ModelSubscriptionStringInput | null;
 	updatedAt?: ModelSubscriptionStringInput | null;
@@ -483,9 +501,10 @@ export type CreateUsersMutation = {
 	createUsers?: {
 		__typename: "Users";
 		id: string;
+		userName: string;
 		email: string;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -501,9 +520,10 @@ export type UpdateUsersMutation = {
 	updateUsers?: {
 		__typename: "Users";
 		id: string;
+		userName: string;
 		email: string;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -519,9 +539,10 @@ export type DeleteUsersMutation = {
 	deleteUsers?: {
 		__typename: "Users";
 		id: string;
+		userName: string;
 		email: string;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -546,8 +567,8 @@ export type CreateCandidatesMutation = {
 		name?: string | null;
 		profileUrl?: string | null;
 		metadata?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -572,8 +593,8 @@ export type UpdateCandidatesMutation = {
 		name?: string | null;
 		profileUrl?: string | null;
 		metadata?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -598,8 +619,8 @@ export type DeleteCandidatesMutation = {
 		name?: string | null;
 		profileUrl?: string | null;
 		metadata?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -624,14 +645,14 @@ export type CreatePostsMutation = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
 		} | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -657,14 +678,14 @@ export type UpdatePostsMutation = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
 		} | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -690,14 +711,14 @@ export type DeletePostsMutation = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
 		} | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -724,8 +745,8 @@ export type SearchCandidatesQuery = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
@@ -763,9 +784,10 @@ export type GetUsersQuery = {
 	getUsers?: {
 		__typename: "Users";
 		id: string;
+		userName: string;
 		email: string;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -784,9 +806,10 @@ export type ListUsersQuery = {
 		items: Array<{
 			__typename: "Users";
 			id: string;
+			userName: string;
 			email: string;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
@@ -809,9 +832,10 @@ export type SyncUsersQuery = {
 		items: Array<{
 			__typename: "Users";
 			id: string;
+			userName: string;
 			email: string;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
@@ -838,8 +862,8 @@ export type GetCandidatesQuery = {
 		name?: string | null;
 		profileUrl?: string | null;
 		metadata?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -862,8 +886,8 @@ export type ListCandidatesQuery = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
@@ -890,8 +914,8 @@ export type SyncCandidatesQuery = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
@@ -918,14 +942,14 @@ export type GetPostsQuery = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
 		} | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -947,8 +971,8 @@ export type ListPostsQuery = {
 			id: string;
 			postUrl?: string | null;
 			content?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
@@ -974,8 +998,8 @@ export type SyncPostsQuery = {
 			id: string;
 			postUrl?: string | null;
 			content?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
@@ -994,9 +1018,10 @@ export type OnCreateUsersSubscription = {
 	onCreateUsers?: {
 		__typename: "Users";
 		id: string;
+		userName: string;
 		email: string;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -1011,9 +1036,10 @@ export type OnUpdateUsersSubscription = {
 	onUpdateUsers?: {
 		__typename: "Users";
 		id: string;
+		userName: string;
 		email: string;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -1028,9 +1054,10 @@ export type OnDeleteUsersSubscription = {
 	onDeleteUsers?: {
 		__typename: "Users";
 		id: string;
+		userName: string;
 		email: string;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -1054,8 +1081,8 @@ export type OnCreateCandidatesSubscription = {
 		name?: string | null;
 		profileUrl?: string | null;
 		metadata?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -1079,8 +1106,8 @@ export type OnUpdateCandidatesSubscription = {
 		name?: string | null;
 		profileUrl?: string | null;
 		metadata?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -1104,8 +1131,8 @@ export type OnDeleteCandidatesSubscription = {
 		name?: string | null;
 		profileUrl?: string | null;
 		metadata?: string | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -1129,14 +1156,14 @@ export type OnCreatePostsSubscription = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
 		} | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -1161,14 +1188,14 @@ export type OnUpdatePostsSubscription = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
 		} | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
@@ -1193,14 +1220,14 @@ export type OnDeletePostsSubscription = {
 			name?: string | null;
 			profileUrl?: string | null;
 			metadata?: string | null;
-			createdAt: string;
-			updatedAt: string;
+			createdAt?: string | null;
+			updatedAt?: string | null;
 			_version: number;
 			_deleted?: boolean | null;
 			_lastChangedAt: number;
 		} | null;
-		createdAt: string;
-		updatedAt: string;
+		createdAt?: string | null;
+		updatedAt?: string | null;
 		_version: number;
 		_deleted?: boolean | null;
 		_lastChangedAt: number;
