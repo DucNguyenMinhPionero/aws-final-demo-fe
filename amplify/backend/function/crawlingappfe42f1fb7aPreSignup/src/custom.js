@@ -15,6 +15,9 @@ exports.handler = async (event, context) => {
 				id: uuidv4(),
 				userName: event.userName,
 				email: event.request.userAttributes.email,
+				createdAt: new Date().toISOString(),
+				_version: 1,
+				_lastChangedAt: Math.floor(new Date().getTime() / 1000),
 			},
 		};
 		const data = await docClient.put(params).promise();

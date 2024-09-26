@@ -11,8 +11,28 @@
 		},
 		"conflictResolution": {
 			"defaultResolutionStrategy": {
-				"type": "OPTIMISTIC_CONCURRENCY"
-			}
+				"type": "AUTOMERGE"
+			},
+			"perModelResolutionStrategy": [
+				{
+					"resolutionStrategy": {
+						"type": "AUTOMERGE"
+					},
+					"entityName": "Users"
+				},
+				{
+					"resolutionStrategy": {
+						"type": "AUTOMERGE"
+					},
+					"entityName": "Candidates"
+				},
+				{
+					"resolutionStrategy": {
+						"type": "AUTOMERGE"
+					},
+					"entityName": "Posts"
+				}
+			]
 		},
 		"additionalAuthTypes": [
 			{

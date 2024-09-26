@@ -3,8 +3,22 @@
 	"ElasticsearchWarning": true,
 	"ResolverConfig": {
 		"project": {
-			"ConflictHandler": "OPTIMISTIC_CONCURRENCY",
+			"ConflictHandler": "AUTOMERGE",
 			"ConflictDetection": "VERSION"
+		},
+		"models": {
+			"Users": {
+				"ConflictHandler": "AUTOMERGE",
+				"ConflictDetection": "VERSION"
+			},
+			"Candidates": {
+				"ConflictHandler": "AUTOMERGE",
+				"ConflictDetection": "VERSION"
+			},
+			"Posts": {
+				"ConflictHandler": "AUTOMERGE",
+				"ConflictDetection": "VERSION"
+			}
 		}
 	}
 }
