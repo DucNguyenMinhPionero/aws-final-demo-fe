@@ -11,6 +11,7 @@ import CandidateEditModal from "@/components/candidates/edit";
 import CandidateSearch from "@/components/candidates/search";
 import CandidateTable from "@/components/candidates/table";
 import Pagination from "@/components/common/pagination";
+import Spinner from "@/components/common/spinner";
 import { listCandidates } from "@/graphql/queries";
 import config from "../../amplifyconfiguration.json";
 import { Candidate } from "../libs/type";
@@ -40,6 +41,7 @@ function CandidatePage() {
 		metadata: undefined,
 	});
 	const [candidates, setCandidates] = useState<Candidate[]>([]);
+	const [isLoading, setLoading] = useState(false);
 
 	// other variables
 	const API = generateClient();
@@ -48,11 +50,15 @@ function CandidatePage() {
 	useEffect(() => {
 		async function getListCandidate() {
 			try {
+				setLoading(true);
 				const res = await API.graphql({
 					query: listCandidates,
 				});
 
 				setCandidates(res.data.listCandidates.items);
+				setTimeout(() => {
+					setLoading(false);
+				}, 700);
 			} catch (err) {
 				toast.error((err as Error).message);
 			}
@@ -68,7 +74,17 @@ function CandidatePage() {
 					<CandidateSearch />
 				</div>
 				{/* table */}
-				<CandidateTable candidates={candidates} setModalInfo={setModalInfo} />
+				{isLoading ? (
+					<div className="my-10">
+						<Spinner />
+					</div>
+				) : (
+					<CandidateTable
+						isLoading={isLoading}
+						candidates={candidates}
+						setModalInfo={setModalInfo}
+					/>
+				)}
 				<Pagination
 					totalItems={candidates.length}
 					itemsPerPage={10}

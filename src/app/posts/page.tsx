@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import Pagination from "@/components/common/pagination";
+import Spinner from "@/components/common/spinner";
 import PostEditModal from "@/components/posts/edit";
 import PostSearch from "@/components/posts/search";
 import PostTable from "@/components/posts/table";
@@ -37,6 +38,7 @@ function PostPage() {
 		candidatesPostId: undefined,
 	});
 	const [posts, setPosts] = useState<Post[]>([]);
+	const [isLoading, setLoading] = useState(false);
 
 	// other variables
 	const API = generateClient();
@@ -45,11 +47,15 @@ function PostPage() {
 	useEffect(() => {
 		async function getListPost() {
 			try {
+				setLoading(true);
 				const res = await API.graphql({
 					query: listPosts,
 				});
 
 				setPosts(res.data.listPosts.items);
+				setTimeout(() => {
+					setLoading(false);
+				}, 700);
 			} catch (err) {
 				toast.error((err as Error).message);
 			}
@@ -66,7 +72,17 @@ function PostPage() {
 					<PostSearch />
 				</div>
 				{/* table */}
-				<PostTable posts={posts} setModalInfo={setModalInfo} />
+				{isLoading ? (
+					<div className="my-10">
+						<Spinner />
+					</div>
+				) : (
+					<PostTable
+						isLoading={isLoading}
+						posts={posts}
+						setModalInfo={setModalInfo}
+					/>
+				)}
 				<Pagination
 					totalItems={posts.length}
 					itemsPerPage={10}

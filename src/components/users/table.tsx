@@ -1,17 +1,13 @@
 import clsx from "clsx";
-import { useState } from "react";
 
 import { User } from "@/app/libs/type";
-import Spinner from "../common/spinner";
 
 type UserTableProps = {
 	users: User[];
+	isLoading: boolean;
 };
 
-export default function UserTable({ users }: UserTableProps) {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [isLoading, setLoading] = useState(false);
-
+export default function UserTable({ users, isLoading }: UserTableProps) {
 	return (
 		<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 			<thead
@@ -26,6 +22,9 @@ export default function UserTable({ users }: UserTableProps) {
 					</th>
 					<th scope="col" className="px-6 py-3">
 						Email
+					</th>
+					<th scope="col" className="px-6 py-3">
+						Created Time
 					</th>
 				</tr>
 			</thead>
@@ -42,10 +41,14 @@ export default function UserTable({ users }: UserTableProps) {
 							{item.id}
 						</th>
 						<td className="px-6 py-4">{item.email}</td>
+						<td className="px-6 py-4">
+							{typeof item.createdAt === "string" && (
+								<p>{new Date(item.createdAt).toLocaleString()}</p>
+							)}
+						</td>
 					</tr>
 				))}
 			</tbody>
-			{isLoading && <Spinner />}
 		</table>
 	);
 }

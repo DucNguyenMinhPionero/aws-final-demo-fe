@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import Pagination from "@/components/common/pagination";
+import Spinner from "@/components/common/spinner";
 import UserSearch from "@/components/users/search";
 import UserTable from "@/components/users/table";
 import { listUsers } from "@/graphql/queries";
@@ -26,6 +27,7 @@ export type ModalInfo = {
 function Home() {
 	// state
 	const [users, setUsers] = useState<User[]>([]);
+	const [isLoading, setLoading] = useState(false);
 
 	// other variables
 	const API = generateClient();
@@ -34,11 +36,15 @@ function Home() {
 	useEffect(() => {
 		async function getListCandidate() {
 			try {
+				setLoading(true);
 				const res = await API.graphql({
 					query: listUsers,
 				});
 
 				setUsers(res.data.listUsers.items);
+				setTimeout(() => {
+					setLoading(false);
+				}, 700);
 			} catch (err) {
 				toast.error((err as Error).message);
 			}
@@ -54,7 +60,12 @@ function Home() {
 				<UserSearch />
 			</div>
 			{/* table */}
-			<UserTable users={users} />
+			{isLoading ? (
+				<Spinner />
+			) : (
+				<UserTable users={users} isLoading={isLoading} />
+			)}
+
 			<Pagination
 				totalItems={users.length}
 				itemsPerPage={10}

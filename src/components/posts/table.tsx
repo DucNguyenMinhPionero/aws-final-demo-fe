@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import { Post } from "@/app/libs/type";
 import { type ModalInfo } from "@/app/posts/page";
@@ -9,12 +9,14 @@ import Spinner from "../common/spinner";
 type PostTableProps = {
 	setModalInfo: Dispatch<SetStateAction<ModalInfo>>;
 	posts: Post[];
+	isLoading: boolean;
 };
 
-export default function PostTable({ setModalInfo, posts }: PostTableProps) {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [isLoading, setLoading] = useState(false);
-
+export default function PostTable({
+	setModalInfo,
+	posts,
+	isLoading,
+}: PostTableProps) {
 	return (
 		<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 			<thead

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import { ModalInfo } from "@/app/candidates/page";
 import { Candidate } from "@/app/libs/type";
@@ -9,15 +9,14 @@ import Spinner from "../common/spinner";
 type CandidateTableProps = {
 	setModalInfo: Dispatch<SetStateAction<ModalInfo>>;
 	candidates: Candidate[];
+	isLoading: boolean;
 };
 
 export default function CandidateTable({
 	setModalInfo,
 	candidates,
+	isLoading,
 }: CandidateTableProps) {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [isLoading, setLoading] = useState(false);
-
 	return (
 		<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 			<thead
