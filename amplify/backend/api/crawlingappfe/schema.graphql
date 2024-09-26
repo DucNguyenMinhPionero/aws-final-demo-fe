@@ -7,7 +7,7 @@ type Users @model @aws_api_key {
   email: String!
 }
 
-type Candidates @model @searchable @aws_api_key {
+type Candidates @model @searchable @aws_api_key @aws_cognito_user_pools {
   id: ID!
   post: [Posts] @hasMany
   email: String
@@ -17,7 +17,7 @@ type Candidates @model @searchable @aws_api_key {
   createdAt: AWSDateTime!
 }
 
-type Posts @model @aws_api_key {
+type Posts @model @aws_api_key @aws_cognito_user_pools {
   id: ID!
   postUrl: String
   content: String

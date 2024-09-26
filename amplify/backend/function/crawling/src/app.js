@@ -30,27 +30,41 @@ app.use(function (req, res, next) {
 app.get("/item", async function (req, res) {
 	// Tạo một instance của ECS
 	const ecs = new AWS.ECS();
+	const body = req.body;
 
 	// Thông tin về task definition và cluster
 	const clusterName = "test"; // Tên cluster ECS của bạn
 	const serviceName = "crawler"; // Tên service ECS của bạn
 
 	const params = {
-		cluster: clusterName,
-		service: serviceName,
-		desiredCount: 1, // Số lượng task bạn muốn khởi động
+		cluster: "test",
+		taskDefinition: "crawling-app",
+		overrides: {
+			containerOverrides: [
+				{
+					name: "crawling-app",
+					command: [
+						"node",
+						"src/crawling.js",
+						body.topic,
+						body.total.toString(),
+					], // Truyền topic và total
+				},
+			],
+		},
+		count: 1,
 	};
 
 	try {
 		console.log("start");
 		// Cập nhật desired count của service
-		const data = await ecs.updateService(params).promise();
+		const data = await ecs.runTask(params).promise();
 		console.log("Service updated successfully:", data);
 		return {
 			statusCode: 200,
 			body: JSON.stringify({
 				message: "Service updated successfully",
-				data: data,
+				data: null,
 			}),
 		};
 	} catch (error) {
@@ -63,13 +77,11 @@ app.get("/item", async function (req, res) {
 			}),
 		};
 	}
-
-	res.json({ success: "get call succeed!", url: req.url });
 });
 
-app.listen(3000, function () {
-	console.log("App started");
-});
+// app.listen(3000, function() {
+//     console.log("App started")
+// });
 
 // Export the app object. When executing the application local this does nothing. However,
 // to port it to AWS Lambda we will create a wrapper around that will load the app from

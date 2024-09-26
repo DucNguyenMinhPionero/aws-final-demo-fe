@@ -9,7 +9,8 @@
 			"UnauthRoleName": "amplify-crawlingappfe-dev-683f8-unauthRole",
 			"StackName": "amplify-crawlingappfe-dev-683f8",
 			"StackId": "arn:aws:cloudformation:ap-northeast-1:845778290046:stack/amplify-crawlingappfe-dev-683f8/d4c913a0-73e4-11ef-89ce-06a7948ca8dd",
-			"AmplifyAppId": "d96kqscet2lox"
+			"AmplifyAppId": "d96kqscet2lox",
+			"AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-crawlingappfe-dev-683f8-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
 		},
 		"categories": {
 			"auth": {
@@ -26,14 +27,19 @@
 				},
 				"crawling": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
-					"s3Key": "amplify-builds/crawling-64317331564864794739-build.zip"
+					"s3Key": "amplify-builds/crawling-51716f3265795742357a-build.zip"
+				},
+				"crawlingappfe42f1fb7aPreSignup": {
+					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
+					"s3Key": "amplify-builds/crawlingappfe42f1fb7aPreSignup-50337234786471664976-build.zip"
 				}
 			},
 			"storage": {
 				"s36e8ca1c7": {}
 			},
 			"api": {
-				"crawlingappfe": {}
+				"crawlingappfe": {},
+				"crawling": {}
 			}
 		}
 	}

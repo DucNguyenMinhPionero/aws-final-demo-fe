@@ -3,14 +3,18 @@ import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { ModalInfo } from "@/app/candidates/page";
-import { MOCK_CANDIDATE } from "@/app/libs/constant";
+import { Candidate } from "@/app/libs/type";
 import Spinner from "../common/spinner";
 
 type CandidateTableProps = {
 	setModalInfo: Dispatch<SetStateAction<ModalInfo>>;
+	candidates: Candidate[];
 };
 
-export default function CandidateTable({ setModalInfo }: CandidateTableProps) {
+export default function CandidateTable({
+	setModalInfo,
+	candidates,
+}: CandidateTableProps) {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [isLoading, setLoading] = useState(false);
 
@@ -36,15 +40,12 @@ export default function CandidateTable({ setModalInfo }: CandidateTableProps) {
 						Profile Link
 					</th>
 					<th scope="col" className="px-6 py-3">
-						Post ID
-					</th>
-					<th scope="col" className="px-6 py-3">
 						Action
 					</th>
 				</tr>
 			</thead>
 			<tbody className={clsx(isLoading ? "opacity-40" : "")}>
-				{MOCK_CANDIDATE.map((item, index) => (
+				{candidates.map((item, index) => (
 					<tr
 						key={index}
 						className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -58,14 +59,15 @@ export default function CandidateTable({ setModalInfo }: CandidateTableProps) {
 						</th>
 						<td className="px-6 py-4">{item.email}</td>
 						<td className="px-6 py-4">
-							<Link
-								href={item.profileUrl}
-								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-							>
-								{item.profileUrl}
-							</Link>
+							{item.profileUrl && (
+								<Link
+									href={item.profileUrl}
+									className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+								>
+									{item.profileUrl}
+								</Link>
+							)}
 						</td>
-						<td className="px-6 py-4">{item.postId}</td>
 						<td className="px-6 py-4">
 							<p
 								onClick={() =>
@@ -75,6 +77,7 @@ export default function CandidateTable({ setModalInfo }: CandidateTableProps) {
 										name: item.name,
 										email: item.email,
 										profileUrl: item.profileUrl,
+										metadata: item.metadata,
 									})
 								}
 								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"

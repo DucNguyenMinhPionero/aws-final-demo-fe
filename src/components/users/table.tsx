@@ -1,10 +1,14 @@
 import clsx from "clsx";
 import { useState } from "react";
 
-import { MOCK_USER } from "@/app/libs/constant";
+import { User } from "@/app/libs/type";
 import Spinner from "../common/spinner";
 
-export default function UserTable() {
+type UserTableProps = {
+	users: User[];
+};
+
+export default function UserTable({ users }: UserTableProps) {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [isLoading, setLoading] = useState(false);
 
@@ -26,7 +30,7 @@ export default function UserTable() {
 				</tr>
 			</thead>
 			<tbody className={clsx(isLoading ? "opacity-40" : "")}>
-				{MOCK_USER.map((item, index) => (
+				{users.map((item, index) => (
 					<tr
 						key={index}
 						className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -35,7 +39,7 @@ export default function UserTable() {
 							scope="row"
 							className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
 						>
-							{item.username}
+							{item.id}
 						</th>
 						<td className="px-6 py-4">{item.email}</td>
 					</tr>

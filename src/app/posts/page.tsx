@@ -2,15 +2,18 @@
 
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
+import { generateClient } from "aws-amplify/api";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import Pagination from "@/components/common/pagination";
 import PostEditModal from "@/components/posts/edit";
 import PostSearch from "@/components/posts/search";
 import PostTable from "@/components/posts/table";
+import { listPosts } from "@/graphql/queries";
 import config from "../../amplifyconfiguration.json";
-import { MOCK_POST } from "../libs/constant";
+import { Post } from "../libs/type";
 
 import "@aws-amplify/ui-react/styles.css";
 
@@ -19,17 +22,41 @@ Amplify.configure(config);
 export type ModalInfo = {
 	isOpen: boolean;
 	id?: string;
-	content?: string;
-	postUrl?: string;
+	content?: string | null;
+	postUrl?: string | null;
+	candidatesPostId?: string | null | undefined;
 };
 
 function PostPage() {
+	// state
 	const [modalInfo, setModalInfo] = useState<ModalInfo>({
 		isOpen: false,
 		id: undefined,
 		content: undefined,
 		postUrl: undefined,
+		candidatesPostId: undefined,
 	});
+	const [posts, setPosts] = useState<Post[]>([]);
+
+	// other variables
+	const API = generateClient();
+
+	// useEffect group
+	useEffect(() => {
+		async function getListPost() {
+			try {
+				const res = await API.graphql({
+					query: listPosts,
+				});
+
+				setPosts(res.data.listPosts.items);
+			} catch (err) {
+				toast.error((err as Error).message);
+			}
+		}
+
+		getListPost();
+	}, []);
 
 	return (
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -39,9 +66,9 @@ function PostPage() {
 					<PostSearch />
 				</div>
 				{/* table */}
-				<PostTable setModalInfo={setModalInfo} />
+				<PostTable posts={posts} setModalInfo={setModalInfo} />
 				<Pagination
-					totalItems={MOCK_POST.length}
+					totalItems={posts.length}
 					itemsPerPage={10}
 					isCurrentPage
 					currentPage={1}

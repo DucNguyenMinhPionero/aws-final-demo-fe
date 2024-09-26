@@ -1,5 +1,16 @@
 {
 	"api": {
+		"crawling": {
+			"dependsOn": [
+				{
+					"attributes": ["Name", "Arn"],
+					"category": "function",
+					"resourceName": "crawling"
+				}
+			],
+			"providerPlugin": "awscloudformation",
+			"service": "API Gateway"
+		},
 		"crawlingappfe": {
 			"dependsOn": [],
 			"output": {
@@ -26,7 +37,14 @@
 	"auth": {
 		"crawlingappfe42f1fb7a": {
 			"customAuth": false,
-			"dependsOn": [],
+			"dependsOn": [
+				{
+					"attributes": ["Arn", "Name"],
+					"category": "function",
+					"resourceName": "crawlingappfe42f1fb7aPreSignup",
+					"triggerProvider": "Cognito"
+				}
+			],
 			"frontendAuthConfig": {
 				"mfaConfiguration": "OFF",
 				"mfaTypes": ["SMS"],
@@ -46,6 +64,22 @@
 	"function": {
 		"crawling": {
 			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		},
+		"crawlingappfe42f1fb7aPreSignup": {
+			"build": true,
+			"dependsOn": [
+				{
+					"attributes": [
+						"GraphQLAPIIdOutput",
+						"GraphQLAPIEndpointOutput",
+						"GraphQLAPIKeyOutput"
+					],
+					"category": "api",
+					"resourceName": "crawlingappfe"
+				}
+			],
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda"
 		},
@@ -74,6 +108,22 @@
 				{
 					"category": "function",
 					"resourceName": "crawling"
+				}
+			]
+		},
+		"AMPLIFY_function_crawlingappfe42f1fb7aPreSignup_deploymentBucketName": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "crawlingappfe42f1fb7aPreSignup"
+				}
+			]
+		},
+		"AMPLIFY_function_crawlingappfe42f1fb7aPreSignup_s3Key": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "crawlingappfe42f1fb7aPreSignup"
 				}
 			]
 		},

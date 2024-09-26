@@ -2,15 +2,16 @@ import clsx from "clsx";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 
-import { MOCK_POST } from "@/app/libs/constant";
+import { Post } from "@/app/libs/type";
 import { type ModalInfo } from "@/app/posts/page";
 import Spinner from "../common/spinner";
 
 type PostTableProps = {
 	setModalInfo: Dispatch<SetStateAction<ModalInfo>>;
+	posts: Post[];
 };
 
-export default function PostTable({ setModalInfo }: PostTableProps) {
+export default function PostTable({ setModalInfo, posts }: PostTableProps) {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [isLoading, setLoading] = useState(false);
 
@@ -41,7 +42,7 @@ export default function PostTable({ setModalInfo }: PostTableProps) {
 				</tr>
 			</thead>
 			<tbody className={clsx(isLoading ? "opacity-40" : "")}>
-				{MOCK_POST.map((item, index) => (
+				{posts.map((item, index) => (
 					<tr
 						key={index}
 						className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -54,14 +55,16 @@ export default function PostTable({ setModalInfo }: PostTableProps) {
 							{item.content}
 						</th>
 						<td className="px-6 py-4">
-							<Link
-								href={item.postUrl}
-								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-							>
-								{item.postUrl}
-							</Link>
+							{item.postUrl && (
+								<Link
+									href={item.postUrl}
+									className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+								>
+									{item.postUrl}
+								</Link>
+							)}
 						</td>
-						<td className="px-6 py-4">{item.candidateId}</td>
+						<td className="px-6 py-4">{item.candidatesPostId}</td>
 						<td className="px-6 py-4">
 							<p
 								onClick={() =>
@@ -70,6 +73,7 @@ export default function PostTable({ setModalInfo }: PostTableProps) {
 										id: item.id,
 										content: item.content,
 										postUrl: item.postUrl,
+										candidatesPostId: item.candidatesPostId,
 									})
 								}
 								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"

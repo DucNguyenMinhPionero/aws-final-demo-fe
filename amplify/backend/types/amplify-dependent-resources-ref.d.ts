@@ -1,5 +1,10 @@
 export type AmplifyDependentResourcesAttributes = {
 	api: {
+		crawling: {
+			ApiId: "string";
+			ApiName: "string";
+			RootUrl: "string";
+		};
 		crawlingappfe: {
 			GraphQLAPIEndpointOutput: "string";
 			GraphQLAPIIdOutput: "string";
@@ -19,6 +24,13 @@ export type AmplifyDependentResourcesAttributes = {
 	};
 	function: {
 		crawling: {
+			Arn: "string";
+			LambdaExecutionRole: "string";
+			LambdaExecutionRoleArn: "string";
+			Name: "string";
+			Region: "string";
+		};
+		crawlingappfe42f1fb7aPreSignup: {
 			Arn: "string";
 			LambdaExecutionRole: "string";
 			LambdaExecutionRoleArn: "string";

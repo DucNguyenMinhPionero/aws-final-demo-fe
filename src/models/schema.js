@@ -130,6 +130,10 @@ export const schema = {
 					type: "aws_api_key",
 					properties: {},
 				},
+				{
+					type: "aws_cognito_user_pools",
+					properties: {},
+				},
 			],
 		},
 		Posts: {
@@ -202,6 +206,10 @@ export const schema = {
 				},
 				{
 					type: "aws_api_key",
+					properties: {},
+				},
+				{
+					type: "aws_cognito_user_pools",
 					properties: {},
 				},
 			],
