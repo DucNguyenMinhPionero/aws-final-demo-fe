@@ -34,12 +34,14 @@ export default function CandidatesUpdateForm(props) {
 		profileUrl: "",
 		metadata: "",
 		createdAt: "",
+		updatedAt: "",
 	};
 	const [email, setEmail] = React.useState(initialValues.email);
 	const [name, setName] = React.useState(initialValues.name);
 	const [profileUrl, setProfileUrl] = React.useState(initialValues.profileUrl);
 	const [metadata, setMetadata] = React.useState(initialValues.metadata);
 	const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
+	const [updatedAt, setUpdatedAt] = React.useState(initialValues.updatedAt);
 	const [errors, setErrors] = React.useState({});
 	const resetStateValues = () => {
 		const cleanValues = candidatesRecord
@@ -54,6 +56,7 @@ export default function CandidatesUpdateForm(props) {
 				: JSON.stringify(cleanValues.metadata),
 		);
 		setCreatedAt(cleanValues.createdAt);
+		setUpdatedAt(cleanValues.updatedAt);
 		setErrors({});
 	};
 	const [candidatesRecord, setCandidatesRecord] =
@@ -73,7 +76,8 @@ export default function CandidatesUpdateForm(props) {
 		name: [],
 		profileUrl: [],
 		metadata: [{ type: "JSON" }],
-		createdAt: [{ type: "Required" }],
+		createdAt: [],
+		updatedAt: [],
 	};
 	const runValidationTasks = async (
 		fieldName,
@@ -123,6 +127,7 @@ export default function CandidatesUpdateForm(props) {
 					profileUrl,
 					metadata,
 					createdAt,
+					updatedAt,
 				};
 				const validationResponses = await Promise.all(
 					Object.keys(validations).reduce((promises, fieldName) => {
@@ -183,6 +188,7 @@ export default function CandidatesUpdateForm(props) {
 							profileUrl,
 							metadata,
 							createdAt,
+							updatedAt,
 						};
 						const result = onChange(modelFields);
 						value = result?.email ?? value;
@@ -211,6 +217,7 @@ export default function CandidatesUpdateForm(props) {
 							profileUrl,
 							metadata,
 							createdAt,
+							updatedAt,
 						};
 						const result = onChange(modelFields);
 						value = result?.name ?? value;
@@ -239,6 +246,7 @@ export default function CandidatesUpdateForm(props) {
 							profileUrl: value,
 							metadata,
 							createdAt,
+							updatedAt,
 						};
 						const result = onChange(modelFields);
 						value = result?.profileUrl ?? value;
@@ -267,6 +275,7 @@ export default function CandidatesUpdateForm(props) {
 							profileUrl,
 							metadata: value,
 							createdAt,
+							updatedAt,
 						};
 						const result = onChange(modelFields);
 						value = result?.metadata ?? value;
@@ -283,7 +292,7 @@ export default function CandidatesUpdateForm(props) {
 			></TextAreaField>
 			<TextField
 				label="Created at"
-				isRequired={true}
+				isRequired={false}
 				isReadOnly={false}
 				type="datetime-local"
 				value={createdAt && convertToLocal(new Date(createdAt))}
@@ -297,6 +306,7 @@ export default function CandidatesUpdateForm(props) {
 							profileUrl,
 							metadata,
 							createdAt: value,
+							updatedAt,
 						};
 						const result = onChange(modelFields);
 						value = result?.createdAt ?? value;
@@ -310,6 +320,37 @@ export default function CandidatesUpdateForm(props) {
 				errorMessage={errors.createdAt?.errorMessage}
 				hasError={errors.createdAt?.hasError}
 				{...getOverrideProps(overrides, "createdAt")}
+			></TextField>
+			<TextField
+				label="Updated at"
+				isRequired={false}
+				isReadOnly={false}
+				type="datetime-local"
+				value={updatedAt && convertToLocal(new Date(updatedAt))}
+				onChange={(e) => {
+					let value =
+						e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+					if (onChange) {
+						const modelFields = {
+							email,
+							name,
+							profileUrl,
+							metadata,
+							createdAt,
+							updatedAt: value,
+						};
+						const result = onChange(modelFields);
+						value = result?.updatedAt ?? value;
+					}
+					if (errors.updatedAt?.hasError) {
+						runValidationTasks("updatedAt", value);
+					}
+					setUpdatedAt(value);
+				}}
+				onBlur={() => runValidationTasks("updatedAt", updatedAt)}
+				errorMessage={errors.updatedAt?.errorMessage}
+				hasError={errors.updatedAt?.hasError}
+				{...getOverrideProps(overrides, "updatedAt")}
 			></TextField>
 			<Flex
 				justifyContent="space-between"

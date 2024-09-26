@@ -8,6 +8,7 @@
 		"@types/aws-lambda": "^8.10.92"
 	},
 	"dependencies": {
-		"node-fetch": "2"
+		"aws-sdk": "^2.1691.0",
+		"uuid": "^10.0.0"
 	}
 }

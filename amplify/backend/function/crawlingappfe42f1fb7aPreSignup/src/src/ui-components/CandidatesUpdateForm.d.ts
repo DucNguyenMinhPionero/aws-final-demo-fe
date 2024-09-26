@@ -35,6 +35,7 @@ export declare type CandidatesUpdateFormInputValues = {
 	profileUrl?: string;
 	metadata?: string;
 	createdAt?: string;
+	updatedAt?: string;
 };
 export declare type CandidatesUpdateFormValidationValues = {
 	email?: ValidationFunction<string>;
@@ -42,6 +43,7 @@ export declare type CandidatesUpdateFormValidationValues = {
 	profileUrl?: ValidationFunction<string>;
 	metadata?: ValidationFunction<string>;
 	createdAt?: ValidationFunction<string>;
+	updatedAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> &
 	React.DOMAttributes<HTMLDivElement>;
@@ -52,6 +54,7 @@ export declare type CandidatesUpdateFormOverridesProps = {
 	profileUrl?: PrimitiveOverrideProps<TextFieldProps>;
 	metadata?: PrimitiveOverrideProps<TextAreaFieldProps>;
 	createdAt?: PrimitiveOverrideProps<TextFieldProps>;
+	updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type CandidatesUpdateFormProps = React.PropsWithChildren<
 	{

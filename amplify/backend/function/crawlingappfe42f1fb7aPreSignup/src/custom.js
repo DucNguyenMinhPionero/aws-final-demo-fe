@@ -1,56 +1,27 @@
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-const fetch = require("node-fetch");
+const AWS = require("aws-sdk");
+const { v4: uuidv4 } = require("uuid");
+
+const docClient = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event, context) => {
-	const GRAPHQL_ENDPOINT =
-		process.env.API_CRAWLINGAPPFE_GRAPHQLAPIENDPOINTOUTPUT;
-	const GRAPHQL_API_KEY = process.env.API_CRAWLINGAPPFE_GRAPHQLAPIKEYOUTPUT;
-
-	const query = `mutation CREATE_USER($input: CreateUserInput!) {
-  createUser(input: $input) {
-    email
-  }
-}`;
-
-	const variables = {
-		input: {
-			email: event.request.userAttributes.email,
-		},
-	};
-
-	const options = {
-		method: "POST",
-		headers: {
-			"x-api-key": GRAPHQL_API_KEY,
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ query, variables }),
-	};
-
-	const response = {};
-
+	console.log("trigger event cognito", event);
 	try {
-		const res = await fetch(GRAPHQL_ENDPOINT, options);
-		response.data = await res.json();
-
-		if (response.data.errors) {
-			response.statusCode = 400;
-		}
-	} catch (error) {
-		response.body = {
-			errors: [
-				{
-					message: error.message,
-					stack: error.stack,
-				},
-			],
+		const params = {
+			TableName: "Users-wxuidfqzrbbnxnp36io5ktrj4a-dev",
+			Item: {
+				id: uuidv4(),
+				userName: event.userName,
+				email: event.request.userAttributes.email,
+			},
 		};
+		const data = await docClient.put(params).promise();
+		console.log("response", data);
+		return { body: "Successfully created item!" };
+	} catch (err) {
+		console.log("err", err);
+		return { error: err };
 	}
-
-	return {
-		...response,
-		body: JSON.stringify(response.body),
-	};
 };
