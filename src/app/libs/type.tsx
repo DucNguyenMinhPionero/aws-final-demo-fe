@@ -5,8 +5,8 @@ export type Candidate = {
 	name?: string | null;
 	profileUrl?: string | null;
 	metadata?: string | null;
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version: number;
 	_deleted?: boolean | null;
 	_lastChangedAt: number;
@@ -17,8 +17,8 @@ export type Post = {
 	id: string;
 	postUrl?: string | null;
 	content?: string | null;
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version: number;
 	_deleted?: boolean | null;
 	_lastChangedAt: number;
@@ -28,9 +28,10 @@ export type Post = {
 export type User = {
 	__typename: "Users";
 	id: string;
+	userName: string;
 	email: string;
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string | null;
+	updatedAt?: string | null;
 	_version: number;
 	_deleted?: boolean | null;
 	_lastChangedAt: number;
