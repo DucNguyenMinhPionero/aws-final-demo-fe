@@ -31,7 +31,7 @@
 				},
 				"crawlingappfe42f1fb7aPreSignup": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
-					"s3Key": "amplify-builds/crawlingappfe42f1fb7aPreSignup-50337234786471664976-build.zip"
+					"s3Key": "amplify-builds/crawlingappfe42f1fb7aPreSignup-64612b6e44362f435050-build.zip"
 				}
 			},
 			"storage": {
