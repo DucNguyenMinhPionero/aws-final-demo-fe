@@ -1,0 +1,12 @@
+{
+	"version": 1,
+	"paths": {
+		"/start-crawling": {
+			"name": "/start-crawling",
+			"lambdaFunction": "crawling",
+			"permissions": {
+				"setting": "open"
+			}
+		}
+	}
+}
