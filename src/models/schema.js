@@ -10,6 +10,13 @@ export const schema = {
 					isRequired: true,
 					attributes: [],
 				},
+				userName: {
+					name: "userName",
+					isArray: false,
+					type: "String",
+					isRequired: true,
+					attributes: [],
+				},
 				email: {
 					name: "email",
 					isArray: false,
@@ -23,7 +30,6 @@ export const schema = {
 					type: "AWSDateTime",
 					isRequired: false,
 					attributes: [],
-					isReadOnly: true,
 				},
 				updatedAt: {
 					name: "updatedAt",
@@ -31,7 +37,6 @@ export const schema = {
 					type: "AWSDateTime",
 					isRequired: false,
 					attributes: [],
-					isReadOnly: true,
 				},
 			},
 			syncable: true,
@@ -103,7 +108,7 @@ export const schema = {
 					name: "createdAt",
 					isArray: false,
 					type: "AWSDateTime",
-					isRequired: true,
+					isRequired: false,
 					attributes: [],
 				},
 				updatedAt: {
@@ -112,7 +117,6 @@ export const schema = {
 					type: "AWSDateTime",
 					isRequired: false,
 					attributes: [],
-					isReadOnly: true,
 				},
 			},
 			syncable: true,
@@ -179,7 +183,6 @@ export const schema = {
 					type: "AWSDateTime",
 					isRequired: false,
 					attributes: [],
-					isReadOnly: true,
 				},
 				updatedAt: {
 					name: "updatedAt",
@@ -187,7 +190,6 @@ export const schema = {
 					type: "AWSDateTime",
 					isRequired: false,
 					attributes: [],
-					isReadOnly: true,
 				},
 				candidatesPostId: {
 					name: "candidatesPostId",
@@ -218,5 +220,5 @@ export const schema = {
 	enums: {},
 	nonModels: {},
 	codegenVersion: "3.4.4",
-	version: "f254ad3ca5d5fcba40556bb18c210746",
+	version: "77dc6bb4d91a3cbe1d654278448eae53",
 };

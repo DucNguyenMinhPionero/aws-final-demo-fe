@@ -53,6 +53,15 @@ app.get("/item", async function (req, res) {
 			],
 		},
 		count: 1,
+		launchType: "FARGATE", // Kiểu launch (EC2 hoặc Fargate)
+
+		// Cấu hình mạng (BẮT BUỘC khi dùng 'awsvpc' network mode)
+		networkConfiguration: {
+			awsvpcConfiguration: {
+				subnets: ["subnet-0b235c5a1477a2949"], // Thay thế bằng subnet ID của bạn
+				securityGroups: ["sg-0894ec599149b890d"], // Thay thế bằng security group ID của bạn
+			},
+		},
 	};
 
 	try {

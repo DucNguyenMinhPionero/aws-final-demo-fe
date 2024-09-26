@@ -11,9 +11,5 @@
 	"triggerEventPath": "PreSignup.event.json",
 	"roleName": "crawlingappfe42f1fb7aPreSignup",
 	"skipEdit": true,
-	"permissions": {
-		"api": {
-			"crawlingappfe": ["Mutation"]
-		}
-	}
+	"permissions": {}
 }

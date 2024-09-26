@@ -2,7 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from "../../amplify/backend/function/crawlingappfe42f1fb7aPreSignup/src/src/API";
 type GeneratedSubscription<InputType, OutputType> = string & {
 	__generatedSubscriptionInput: InputType;
 	__generatedSubscriptionOutput: OutputType;

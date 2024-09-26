@@ -15,9 +15,9 @@ import {
 type EagerUsers = {
 	readonly [__modelMeta__]: {
 		identifier: ManagedIdentifier<Users, "id">;
-		readOnlyFields: "createdAt" | "updatedAt";
 	};
 	readonly id: string;
+	readonly userName: string;
 	readonly email: string;
 	readonly createdAt?: string | null;
 	readonly updatedAt?: string | null;
@@ -26,9 +26,9 @@ type EagerUsers = {
 type LazyUsers = {
 	readonly [__modelMeta__]: {
 		identifier: ManagedIdentifier<Users, "id">;
-		readOnlyFields: "createdAt" | "updatedAt";
 	};
 	readonly id: string;
+	readonly userName: string;
 	readonly email: string;
 	readonly createdAt?: string | null;
 	readonly updatedAt?: string | null;
@@ -48,7 +48,6 @@ export declare const Users: (new (init: ModelInit<Users>) => Users) & {
 type EagerCandidates = {
 	readonly [__modelMeta__]: {
 		identifier: ManagedIdentifier<Candidates, "id">;
-		readOnlyFields: "updatedAt";
 	};
 	readonly id: string;
 	readonly post?: (Posts | null)[] | null;
@@ -56,14 +55,13 @@ type EagerCandidates = {
 	readonly name?: string | null;
 	readonly profileUrl?: string | null;
 	readonly metadata?: string | null;
-	readonly createdAt: string;
+	readonly createdAt?: string | null;
 	readonly updatedAt?: string | null;
 };
 
 type LazyCandidates = {
 	readonly [__modelMeta__]: {
 		identifier: ManagedIdentifier<Candidates, "id">;
-		readOnlyFields: "updatedAt";
 	};
 	readonly id: string;
 	readonly post: AsyncCollection<Posts>;
@@ -71,7 +69,7 @@ type LazyCandidates = {
 	readonly name?: string | null;
 	readonly profileUrl?: string | null;
 	readonly metadata?: string | null;
-	readonly createdAt: string;
+	readonly createdAt?: string | null;
 	readonly updatedAt?: string | null;
 };
 
@@ -93,7 +91,6 @@ export declare const Candidates: (new (
 type EagerPosts = {
 	readonly [__modelMeta__]: {
 		identifier: ManagedIdentifier<Posts, "id">;
-		readOnlyFields: "createdAt" | "updatedAt";
 	};
 	readonly id: string;
 	readonly postUrl?: string | null;
@@ -107,7 +104,6 @@ type EagerPosts = {
 type LazyPosts = {
 	readonly [__modelMeta__]: {
 		identifier: ManagedIdentifier<Posts, "id">;
-		readOnlyFields: "createdAt" | "updatedAt";
 	};
 	readonly id: string;
 	readonly postUrl?: string | null;

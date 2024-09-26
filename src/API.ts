@@ -92,7 +92,6 @@ export type CreateCandidatesInput = {
 	name?: string | null;
 	profileUrl?: string | null;
 	metadata?: string | null;
-	createdAt?: string | null;
 	_version?: number | null;
 };
 
@@ -101,11 +100,11 @@ export type ModelCandidatesConditionInput = {
 	name?: ModelStringInput | null;
 	profileUrl?: ModelStringInput | null;
 	metadata?: ModelStringInput | null;
-	createdAt?: ModelStringInput | null;
 	and?: Array<ModelCandidatesConditionInput | null> | null;
 	or?: Array<ModelCandidatesConditionInput | null> | null;
 	not?: ModelCandidatesConditionInput | null;
 	_deleted?: ModelBooleanInput | null;
+	createdAt?: ModelStringInput | null;
 	updatedAt?: ModelStringInput | null;
 };
 
@@ -151,7 +150,6 @@ export type UpdateCandidatesInput = {
 	name?: string | null;
 	profileUrl?: string | null;
 	metadata?: string | null;
-	createdAt?: string | null;
 	_version?: number | null;
 };
 

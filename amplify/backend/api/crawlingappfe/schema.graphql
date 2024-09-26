@@ -4,7 +4,10 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONL
 
 type Users @model @aws_api_key {
   id: ID!
+  userName: String!
   email: String!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
 
 type Candidates @model @searchable @aws_api_key @aws_cognito_user_pools {
@@ -14,7 +17,8 @@ type Candidates @model @searchable @aws_api_key @aws_cognito_user_pools {
   name: String
   profileUrl: String
   metadata: AWSJSON
-  createdAt: AWSDateTime!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
 
 type Posts @model @aws_api_key @aws_cognito_user_pools {
@@ -22,5 +26,7 @@ type Posts @model @aws_api_key @aws_cognito_user_pools {
   postUrl: String
   content: String
   candidate: Candidates @belongsTo
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
 

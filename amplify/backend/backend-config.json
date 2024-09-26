@@ -69,17 +69,7 @@
 		},
 		"crawlingappfe42f1fb7aPreSignup": {
 			"build": true,
-			"dependsOn": [
-				{
-					"attributes": [
-						"GraphQLAPIIdOutput",
-						"GraphQLAPIEndpointOutput",
-						"GraphQLAPIKeyOutput"
-					],
-					"category": "api",
-					"resourceName": "crawlingappfe"
-				}
-			],
+			"dependsOn": [],
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda"
 		},

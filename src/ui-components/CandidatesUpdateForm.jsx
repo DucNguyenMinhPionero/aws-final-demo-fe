@@ -33,13 +33,11 @@ export default function CandidatesUpdateForm(props) {
 		name: "",
 		profileUrl: "",
 		metadata: "",
-		createdAt: "",
 	};
 	const [email, setEmail] = React.useState(initialValues.email);
 	const [name, setName] = React.useState(initialValues.name);
 	const [profileUrl, setProfileUrl] = React.useState(initialValues.profileUrl);
 	const [metadata, setMetadata] = React.useState(initialValues.metadata);
-	const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
 	const [errors, setErrors] = React.useState({});
 	const resetStateValues = () => {
 		const cleanValues = candidatesRecord
@@ -53,7 +51,6 @@ export default function CandidatesUpdateForm(props) {
 				? cleanValues.metadata
 				: JSON.stringify(cleanValues.metadata),
 		);
-		setCreatedAt(cleanValues.createdAt);
 		setErrors({});
 	};
 	const [candidatesRecord, setCandidatesRecord] =
@@ -73,7 +70,6 @@ export default function CandidatesUpdateForm(props) {
 		name: [],
 		profileUrl: [],
 		metadata: [{ type: "JSON" }],
-		createdAt: [{ type: "Required" }],
 	};
 	const runValidationTasks = async (
 		fieldName,
@@ -92,23 +88,6 @@ export default function CandidatesUpdateForm(props) {
 		setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
 		return validationResponse;
 	};
-	const convertToLocal = (date) => {
-		const df = new Intl.DateTimeFormat("default", {
-			year: "numeric",
-			month: "2-digit",
-			day: "2-digit",
-			hour: "2-digit",
-			minute: "2-digit",
-			calendar: "iso8601",
-			numberingSystem: "latn",
-			hourCycle: "h23",
-		});
-		const parts = df.formatToParts(date).reduce((acc, part) => {
-			acc[part.type] = part.value;
-			return acc;
-		}, {});
-		return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
-	};
 	return (
 		<Grid
 			as="form"
@@ -122,7 +101,6 @@ export default function CandidatesUpdateForm(props) {
 					name,
 					profileUrl,
 					metadata,
-					createdAt,
 				};
 				const validationResponses = await Promise.all(
 					Object.keys(validations).reduce((promises, fieldName) => {
@@ -182,7 +160,6 @@ export default function CandidatesUpdateForm(props) {
 							name,
 							profileUrl,
 							metadata,
-							createdAt,
 						};
 						const result = onChange(modelFields);
 						value = result?.email ?? value;
@@ -210,7 +187,6 @@ export default function CandidatesUpdateForm(props) {
 							name: value,
 							profileUrl,
 							metadata,
-							createdAt,
 						};
 						const result = onChange(modelFields);
 						value = result?.name ?? value;
@@ -238,7 +214,6 @@ export default function CandidatesUpdateForm(props) {
 							name,
 							profileUrl: value,
 							metadata,
-							createdAt,
 						};
 						const result = onChange(modelFields);
 						value = result?.profileUrl ?? value;
@@ -266,7 +241,6 @@ export default function CandidatesUpdateForm(props) {
 							name,
 							profileUrl,
 							metadata: value,
-							createdAt,
 						};
 						const result = onChange(modelFields);
 						value = result?.metadata ?? value;
@@ -281,36 +255,6 @@ export default function CandidatesUpdateForm(props) {
 				hasError={errors.metadata?.hasError}
 				{...getOverrideProps(overrides, "metadata")}
 			></TextAreaField>
-			<TextField
-				label="Created at"
-				isRequired={true}
-				isReadOnly={false}
-				type="datetime-local"
-				value={createdAt && convertToLocal(new Date(createdAt))}
-				onChange={(e) => {
-					let value =
-						e.target.value === "" ? "" : new Date(e.target.value).toISOString();
-					if (onChange) {
-						const modelFields = {
-							email,
-							name,
-							profileUrl,
-							metadata,
-							createdAt: value,
-						};
-						const result = onChange(modelFields);
-						value = result?.createdAt ?? value;
-					}
-					if (errors.createdAt?.hasError) {
-						runValidationTasks("createdAt", value);
-					}
-					setCreatedAt(value);
-				}}
-				onBlur={() => runValidationTasks("createdAt", createdAt)}
-				errorMessage={errors.createdAt?.errorMessage}
-				hasError={errors.createdAt?.hasError}
-				{...getOverrideProps(overrides, "createdAt")}
-			></TextField>
 			<Flex
 				justifyContent="space-between"
 				{...getOverrideProps(overrides, "CTAFlex")}

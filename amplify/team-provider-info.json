@@ -27,11 +27,11 @@
 				},
 				"crawling": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
-					"s3Key": "amplify-builds/crawling-51716f3265795742357a-build.zip"
+					"s3Key": "amplify-builds/crawling-414e4f71786f61462f33-build.zip"
 				},
 				"crawlingappfe42f1fb7aPreSignup": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
-					"s3Key": "amplify-builds/crawlingappfe42f1fb7aPreSignup-64612b6e44362f435050-build.zip"
+					"s3Key": "amplify-builds/crawlingappfe42f1fb7aPreSignup-34736162394a56304643-build.zip"
 				}
 			},
 			"storage": {
