@@ -4,7 +4,8 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { cloneDeep } from "lodash";
+import { useCallback, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 import CandidateEditModal from "@/components/candidates/edit";
@@ -14,6 +15,7 @@ import Pagination from "@/components/common/pagination";
 import Spinner from "@/components/common/spinner";
 import { listCandidates } from "@/graphql/queries";
 import config from "../../amplifyconfiguration.json";
+import { PER_PAGE_LIMIT } from "../libs/constant";
 import { Candidate } from "../libs/type";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -42,29 +44,66 @@ function CandidatePage() {
 	});
 	const [candidates, setCandidates] = useState<Candidate[]>([]);
 	const [isLoading, setLoading] = useState(false);
+	const [currentToken, setCurrentToken] = useState<string | undefined>(
+		undefined,
+	);
+	const [nextToken, setNextToken] = useState<string | undefined>(undefined);
+	const [previousTokens, setPreviousTokens] = useState<string[]>([]);
 
 	// other variables
 	const API = generateClient();
 
+	// function group
+	// call API
+	const getCandidates = useCallback(async (token?: string) => {
+		try {
+			setLoading(true);
+			const res = await API.graphql({
+				query: listCandidates,
+				variables: {
+					limit: PER_PAGE_LIMIT,
+					nextToken: token,
+				},
+			});
+
+			if (res.data.listCandidates.nextToken) {
+				setNextToken(res.data.listCandidates.nextToken);
+			} else {
+				setNextToken(undefined);
+			}
+			setCandidates(res.data.listCandidates.items);
+			setTimeout(() => {
+				setLoading(false);
+			}, 500);
+		} catch {
+			toast.error("Please try again!");
+		}
+	}, []);
+
+	// pagination group
+	const handleNext = () => {
+		if (currentToken) {
+			setPreviousTokens((prev) => [...prev, currentToken]);
+		}
+		setCurrentToken(nextToken);
+		getCandidates(nextToken);
+	};
+
+	const handlePrev = () => {
+		setCurrentToken(
+			previousTokens.length === 1
+				? previousTokens[previousTokens.length - 1]
+				: undefined,
+		);
+		getCandidates(previousTokens[previousTokens.length - 1]);
+		const clone = cloneDeep(previousTokens);
+		clone.pop();
+		setPreviousTokens(clone);
+	};
+
 	// useEffect group
 	useEffect(() => {
-		async function getListCandidate() {
-			try {
-				setLoading(true);
-				const res = await API.graphql({
-					query: listCandidates,
-				});
-
-				setCandidates(res.data.listCandidates.items);
-				setTimeout(() => {
-					setLoading(false);
-				}, 700);
-			} catch (err) {
-				toast.error((err as Error).message);
-			}
-		}
-
-		getListCandidate();
+		getCandidates();
 	}, []);
 
 	return (
@@ -86,10 +125,11 @@ function CandidatePage() {
 					/>
 				)}
 				<Pagination
-					totalItems={candidates.length}
-					itemsPerPage={10}
-					isCurrentPage
-					currentPage={1}
+					handleNextPage={handleNext}
+					handlePrevPage={handlePrev}
+					previousTokens={previousTokens}
+					nextToken={nextToken}
+					currentToken={currentToken}
 				/>
 			</div>
 			{/* search */}

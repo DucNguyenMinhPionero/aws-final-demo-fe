@@ -31,3 +31,5 @@ export const SIDE_BAR_ITEMS: SideBarProps[] = [
 		href: "/email",
 	},
 ];
+
+export const PER_PAGE_LIMIT = 10;

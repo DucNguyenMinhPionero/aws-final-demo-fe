@@ -4,7 +4,8 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { cloneDeep } from "lodash";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import Pagination from "@/components/common/pagination";
@@ -14,6 +15,7 @@ import PostSearch from "@/components/posts/search";
 import PostTable from "@/components/posts/table";
 import { listPosts } from "@/graphql/queries";
 import config from "../../amplifyconfiguration.json";
+import { PER_PAGE_LIMIT } from "../libs/constant";
 import { Post } from "../libs/type";
 
 import "@aws-amplify/ui-react/styles.css";
@@ -39,29 +41,66 @@ function PostPage() {
 	});
 	const [posts, setPosts] = useState<Post[]>([]);
 	const [isLoading, setLoading] = useState(false);
+	const [nextToken, setNextToken] = useState<string | undefined>(undefined);
+	const [currentToken, setCurrentToken] = useState<string | undefined>(
+		undefined,
+	);
+	const [previousTokens, setPreviousTokens] = useState<string[]>([]);
 
 	// other variables
 	const API = generateClient();
 
+	// function group
+	// call API
+	const getPosts = useCallback(async (token?: string) => {
+		try {
+			setLoading(true);
+			const res = await API.graphql({
+				query: listPosts,
+				variables: {
+					limit: PER_PAGE_LIMIT,
+					nextToken: token,
+				},
+			});
+
+			if (res.data.listPosts.nextToken) {
+				setNextToken(res.data.listPosts.nextToken);
+			} else {
+				setNextToken(undefined);
+			}
+			setPosts(res.data.listPosts.items);
+			setTimeout(() => {
+				setLoading(false);
+			}, 700);
+		} catch (err) {
+			toast.error((err as Error).message);
+		}
+	}, []);
+
+	// pagination group
+	const handleNext = () => {
+		if (currentToken) {
+			setPreviousTokens((prev) => [...prev, currentToken]);
+		}
+		setCurrentToken(nextToken);
+		getPosts(nextToken);
+	};
+
+	const handlePrev = () => {
+		setCurrentToken(
+			previousTokens.length === 1
+				? previousTokens[previousTokens.length - 1]
+				: undefined,
+		);
+		getPosts(previousTokens[previousTokens.length - 1]);
+		const clone = cloneDeep(previousTokens);
+		clone.pop();
+		setPreviousTokens(clone);
+	};
+
 	// useEffect group
 	useEffect(() => {
-		async function getListPost() {
-			try {
-				setLoading(true);
-				const res = await API.graphql({
-					query: listPosts,
-				});
-
-				setPosts(res.data.listPosts.items);
-				setTimeout(() => {
-					setLoading(false);
-				}, 700);
-			} catch (err) {
-				toast.error((err as Error).message);
-			}
-		}
-
-		getListPost();
+		getPosts();
 	}, []);
 
 	return (
@@ -84,10 +123,11 @@ function PostPage() {
 					/>
 				)}
 				<Pagination
-					totalItems={posts.length}
-					itemsPerPage={10}
-					isCurrentPage
-					currentPage={1}
+					handleNextPage={handleNext}
+					handlePrevPage={handlePrev}
+					previousTokens={previousTokens}
+					nextToken={nextToken}
+					currentToken={currentToken}
 				/>
 			</div>
 			{/* Edit modal */}
