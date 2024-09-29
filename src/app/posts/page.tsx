@@ -69,12 +69,12 @@ function PostPage() {
 				setNextToken(undefined);
 			}
 			setPosts(res.data.listPosts.items);
-			setTimeout(() => {
-				setLoading(false);
-			}, 700);
 		} catch (err) {
 			toast.error((err as Error).message);
 		}
+		setTimeout(() => {
+			setLoading(false);
+		}, 500);
 	}, []);
 
 	// pagination group

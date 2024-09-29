@@ -1,9 +1,12 @@
+import { generateClient } from "aws-amplify/api";
 import clsx from "clsx";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import CloseSvg from "@/app/libs/svg/close-svg";
 import EditSvg from "@/app/libs/svg/edit-svg";
 import { type ModalInfo } from "@/app/posts/page";
+import { updatePosts } from "@/graphql/mutations";
 
 type PostEditModalProps = {
 	modalInfo: ModalInfo;
@@ -14,6 +17,52 @@ export default function PostEditModal({
 	modalInfo,
 	setModalInfo,
 }: PostEditModalProps) {
+	// state
+	const [isLoading, setLoading] = useState(false);
+	const [input, setInput] = useState<{
+		id?: string;
+		content?: string | null;
+		postUrl?: string | null;
+	}>({});
+
+	// other variables
+	const API = generateClient();
+
+	// useEffect group
+	useEffect(() => {
+		setInput({
+			id: modalInfo.id,
+			content: modalInfo.content,
+			postUrl: modalInfo.postUrl,
+		});
+	}, [modalInfo]);
+
+	// function group
+	const updatePost = async () => {
+		if (!input.id) {
+			return;
+		}
+
+		try {
+			setLoading(true);
+			await API.graphql({
+				query: updatePosts,
+				variables: {
+					input: {
+						id: input.id,
+						content: input.content,
+						postUrl: input.postUrl,
+					},
+				},
+			});
+		} catch {
+			toast.error("Something wrong! Please try again");
+		}
+		setTimeout(() => {
+			setLoading(false);
+		}, 500);
+	};
+
 	return (
 		<div
 			id="crud-modal"
@@ -21,7 +70,7 @@ export default function PostEditModal({
 			aria-hidden="true"
 			className={clsx(
 				"overflow-y-auto overflow-x-hidden flex z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full",
-				modalInfo.isOpen ? "" : "hidden",
+				modalInfo.isOpen ? "fixed" : "hidden",
 			)}
 		>
 			<div className="relative p-4 w-full max-w-md max-h-full">
@@ -87,8 +136,15 @@ export default function PostEditModal({
 							</div>
 						</div>
 						<button
-							type="submit"
-							className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+							disabled={isLoading}
+							type="button"
+							onClick={updatePost}
+							className={clsx(
+								"text-white inline-flex items-center font-medium rounded-lg text-sm px-5 py-2.5 text-center",
+								isLoading
+									? "dark:bg-blue-900"
+									: "focus:ring-4 focus:outline-none focus:ring-blue-300 bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+							)}
 						>
 							<EditSvg />
 							Edit

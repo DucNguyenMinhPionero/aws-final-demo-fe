@@ -20,12 +20,6 @@ import "@aws-amplify/ui-react/styles.css";
 
 Amplify.configure(config);
 
-export type ModalInfo = {
-	isOpen: boolean;
-	id?: string;
-	email?: string | null;
-};
-
 function Home() {
 	// state
 	const [users, setUsers] = useState<User[]>([]);
@@ -58,12 +52,12 @@ function Home() {
 				setNextToken(undefined);
 			}
 			setUsers(res.data.listUsers.items);
-			setTimeout(() => {
-				setLoading(false);
-			}, 500);
 		} catch {
 			toast.error("Please try again!");
 		}
+		setTimeout(() => {
+			setLoading(false);
+		}, 500);
 	}, []);
 
 	// pagination group

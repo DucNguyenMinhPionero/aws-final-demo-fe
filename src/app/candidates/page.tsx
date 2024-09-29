@@ -72,12 +72,12 @@ function CandidatePage() {
 				setNextToken(undefined);
 			}
 			setCandidates(res.data.listCandidates.items);
-			setTimeout(() => {
-				setLoading(false);
-			}, 500);
 		} catch {
 			toast.error("Please try again!");
 		}
+		setTimeout(() => {
+			setLoading(false);
+		}, 500);
 	}, []);
 
 	// pagination group
