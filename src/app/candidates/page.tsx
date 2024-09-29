@@ -30,6 +30,7 @@ export type ModalInfo = {
 	email?: string | null;
 	profileUrl?: string | null;
 	metadata?: string | null;
+	_version?: number;
 };
 
 function CandidatePage() {
@@ -41,6 +42,7 @@ function CandidatePage() {
 		email: undefined,
 		profileUrl: undefined,
 		metadata: undefined,
+		_version: undefined,
 	});
 	const [candidates, setCandidates] = useState<Candidate[]>([]);
 	const [isLoading, setLoading] = useState(false);
@@ -103,8 +105,12 @@ function CandidatePage() {
 
 	// useEffect group
 	useEffect(() => {
+		if (modalInfo.isOpen) {
+			return;
+		}
+
 		getCandidates();
-	}, []);
+	}, [modalInfo.isOpen]);
 
 	return (
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg">

@@ -52,12 +52,21 @@ export default function PostEditModal({
 						id: input.id,
 						content: input.content,
 						postUrl: input.postUrl,
+						_version: modalInfo._version,
 					},
 				},
 			});
 		} catch {
 			toast.error("Something wrong! Please try again");
 		}
+		setModalInfo({
+			isOpen: false,
+			id: undefined,
+			content: undefined,
+			postUrl: undefined,
+			candidatesPostId: undefined,
+		});
+		setInput({});
 		setTimeout(() => {
 			setLoading(false);
 		}, 500);
@@ -82,15 +91,16 @@ export default function PostEditModal({
 							Edit Post
 						</h3>
 						<button
-							onClick={() =>
+							onClick={() => {
 								setModalInfo({
 									isOpen: false,
 									id: undefined,
 									content: undefined,
 									postUrl: undefined,
 									candidatesPostId: undefined,
-								})
-							}
+								});
+								setInput({});
+							}}
 							type="button"
 							className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
 							data-modal-toggle="crud-modal"

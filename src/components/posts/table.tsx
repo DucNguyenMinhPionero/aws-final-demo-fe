@@ -76,6 +76,7 @@ export default function PostTable({
 										content: item.content,
 										postUrl: item.postUrl,
 										candidatesPostId: item.candidatesPostId,
+										_version: item._version,
 									})
 								}
 								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"

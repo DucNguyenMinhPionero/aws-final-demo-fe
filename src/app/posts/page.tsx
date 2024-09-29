@@ -28,6 +28,7 @@ export type ModalInfo = {
 	content?: string | null;
 	postUrl?: string | null;
 	candidatesPostId?: string | null | undefined;
+	_version?: number;
 };
 
 function PostPage() {
@@ -38,6 +39,7 @@ function PostPage() {
 		content: undefined,
 		postUrl: undefined,
 		candidatesPostId: undefined,
+		_version: undefined,
 	});
 	const [posts, setPosts] = useState<Post[]>([]);
 	const [isLoading, setLoading] = useState(false);
@@ -100,8 +102,12 @@ function PostPage() {
 
 	// useEffect group
 	useEffect(() => {
+		if (modalInfo.isOpen) {
+			return;
+		}
+
 		getPosts();
-	}, []);
+	}, [modalInfo.isOpen]);
 
 	return (
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg">

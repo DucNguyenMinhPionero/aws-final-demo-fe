@@ -77,6 +77,7 @@ export default function CandidateTable({
 										email: item.email,
 										profileUrl: item.profileUrl,
 										metadata: item.metadata,
+										_version: item._version,
 									})
 								}
 								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"

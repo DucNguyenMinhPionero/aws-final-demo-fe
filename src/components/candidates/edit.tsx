@@ -55,21 +55,24 @@ export default function CandidateEditModal({
 						email: input.email,
 						name: input.name,
 						profileUrl: input.profileUrl,
+						_version: modalInfo._version ?? 1,
 					},
 				},
-			});
-			setModalInfo({
-				isOpen: false,
-				id: undefined,
-				name: undefined,
-				email: undefined,
-				profileUrl: undefined,
-				metadata: undefined,
 			});
 			setInput({});
 		} catch {
 			toast.error("Something wrong! Please try again");
 		}
+		setModalInfo({
+			isOpen: false,
+			id: undefined,
+			name: undefined,
+			email: undefined,
+			profileUrl: undefined,
+			metadata: undefined,
+			_version: undefined,
+		});
+		setInput({});
 		setTimeout(() => {
 			setLoading(false);
 		}, 500);
@@ -102,6 +105,7 @@ export default function CandidateEditModal({
 									email: undefined,
 									profileUrl: undefined,
 									metadata: undefined,
+									_version: undefined,
 								});
 								setInput({});
 							}}
