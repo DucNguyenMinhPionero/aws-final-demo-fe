@@ -14,12 +14,16 @@ type PostTableProps = {
 	setModalInfo: Dispatch<SetStateAction<ModalInfo>>;
 	posts: Post[];
 	isLoading: boolean;
+	getPosts: (token?: string, id?: string) => Promise<void>;
+	searchTerm: string;
 };
 
 export default function PostTable({
 	setModalInfo,
 	posts,
 	isLoading,
+	getPosts,
+	searchTerm,
 }: PostTableProps) {
 	const API = generateClient();
 
@@ -32,10 +36,10 @@ export default function PostTable({
 			title: "Do you want to delete this post?",
 			showCancelButton: true,
 			confirmButtonText: "Yes",
-		}).then((result) => {
+		}).then(async (result) => {
 			if (result.isConfirmed) {
 				try {
-					API.graphql({
+					await API.graphql({
 						query: deletePosts,
 						variables: {
 							input: {
@@ -44,6 +48,8 @@ export default function PostTable({
 							},
 						},
 					});
+
+					await getPosts(undefined, searchTerm);
 
 					toast.success("Delete post successfully");
 				} catch {

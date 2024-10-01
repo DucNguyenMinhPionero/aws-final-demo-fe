@@ -14,12 +14,16 @@ type CandidateTableProps = {
 	setModalInfo: Dispatch<SetStateAction<ModalInfo>>;
 	candidates: Candidate[];
 	isLoading: boolean;
+	getCandidates: (token?: string, text?: string) => Promise<void>;
+	searchTerm: string;
 };
 
 export default function CandidateTable({
 	setModalInfo,
 	candidates,
 	isLoading,
+	getCandidates,
+	searchTerm,
 }: CandidateTableProps) {
 	const API = generateClient();
 
@@ -32,10 +36,10 @@ export default function CandidateTable({
 			title: "Do you want to delete this candidate?",
 			showCancelButton: true,
 			confirmButtonText: "Yes",
-		}).then((result) => {
+		}).then(async (result) => {
 			if (result.isConfirmed) {
 				try {
-					API.graphql({
+					await API.graphql({
 						query: deleteCandidates,
 						variables: {
 							input: {
@@ -44,6 +48,8 @@ export default function CandidateTable({
 							},
 						},
 					});
+
+					await getCandidates(undefined, searchTerm);
 
 					toast.success("Delete candidate successfully");
 				} catch {

@@ -67,11 +67,19 @@ function CandidatePage() {
 						name: {
 							contains: text,
 						},
+						_deleted: {
+							ne: true,
+						},
 					},
 				}
 			: {
 					limit: PER_PAGE_LIMIT,
 					nextToken: token,
+					filter: {
+						_deleted: {
+							ne: true,
+						},
+					},
 				};
 
 		try {
@@ -145,6 +153,8 @@ function CandidatePage() {
 						isLoading={isLoading}
 						candidates={candidates}
 						setModalInfo={setModalInfo}
+						getCandidates={getCandidates}
+						searchTerm={searchTerm}
 					/>
 				)}
 				<Pagination

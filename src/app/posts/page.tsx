@@ -64,11 +64,19 @@ function PostPage() {
 						id: {
 							contains: id,
 						},
+						_deleted: {
+							ne: true,
+						},
 					},
 				}
 			: {
 					limit: PER_PAGE_LIMIT,
 					nextToken: token,
+					filter: {
+						_deleted: {
+							ne: true,
+						},
+					},
 				};
 
 		try {
@@ -143,6 +151,8 @@ function PostPage() {
 						isLoading={isLoading}
 						posts={posts}
 						setModalInfo={setModalInfo}
+						getPosts={getPosts}
+						searchTerm={searchTerm}
 					/>
 				)}
 				<Pagination
