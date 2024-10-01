@@ -1,14 +1,21 @@
 import { get } from "aws-amplify/api";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 import SendSvg from "@/app/libs/svg/send-svg";
 
 export default function EmailForm() {
+	const [content, setContent] = useState("");
+	const [subject, setSubject] = useState("");
+
 	const sendAllMails = async function postTodo() {
 		try {
 			const restOperation = get({
 				apiName: "crawling",
 				path: "/emails",
+				options: {
+					body: JSON.stringify({ content, subject }),
+				},
 			});
 
 			const { body } = await restOperation.response;
@@ -37,6 +44,8 @@ export default function EmailForm() {
 							Email Subject
 						</label>
 						<input
+							value={subject}
+							onChange={(e) => setSubject(e.target.value)}
 							type="text"
 							id="email"
 							className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
@@ -52,6 +61,8 @@ export default function EmailForm() {
 							Email Content
 						</label>
 						<input
+							value={content}
+							onChange={(e) => setContent(e.target.value)}
 							type="text"
 							id="content"
 							className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"

@@ -1,7 +1,7 @@
 const { SESClient, SendEmailCommand } = require("@aws-sdk/client-ses");
 
 const sesClient = new SESClient({ region: "ap-northeast-1" });
-const SENDER_EMAIL = "your-sender-email@example.com";
+const SENDER_EMAIL = "awsweek14@hungpham.lol";
 
 exports.handler = async (event) => {
 	try {
@@ -17,11 +17,7 @@ exports.handler = async (event) => {
 			body: JSON.stringify("Emails sent successfully via SES"),
 		};
 	} catch (error) {
-		console.error("Error sending emails:", error);
-		return {
-			statusCode: 500,
-			body: JSON.stringify("Error sending emails"),
-		};
+		console.log("Error sending emails:", error);
 	}
 };
 

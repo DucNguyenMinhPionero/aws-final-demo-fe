@@ -31,15 +31,15 @@
 				},
 				"sendMailToSES": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
-					"s3Key": "amplify-builds/sendMailToSES-6252776b323639717679-build.zip"
+					"s3Key": "amplify-builds/sendMailToSES-704b47654a5450744648-build.zip"
 				},
 				"sendMailsToSQS": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
-					"s3Key": "amplify-builds/sendMailsToSQS-764a334c693244595065-build.zip"
+					"s3Key": "amplify-builds/sendMailsToSQS-6e525953465535534145-build.zip"
 				},
 				"startCrawling": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
-					"s3Key": "amplify-builds/startCrawling-4f754f474d4b39535733-build.zip"
+					"s3Key": "amplify-builds/startCrawling-74306a4c733549743543-build.zip"
 				}
 			},
 			"storage": {

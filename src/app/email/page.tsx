@@ -2,6 +2,7 @@
 
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
+import { ToastContainer } from "react-toastify";
 
 import Crawling from "@/components/email/crawling";
 import EmailForm from "@/components/email/form";
@@ -16,6 +17,7 @@ function EmailPage() {
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
 			<Crawling />
 			<EmailForm />
+			<ToastContainer />
 		</div>
 	);
 }
