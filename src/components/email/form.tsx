@@ -1,4 +1,4 @@
-import { get } from "aws-amplify/api";
+import { post } from "aws-amplify/api";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -10,7 +10,7 @@ export default function EmailForm() {
 
 	const sendAllMails = async function postTodo() {
 		try {
-			const restOperation = get({
+			const restOperation = post({
 				apiName: "crawling",
 				path: "/emails",
 				options: {

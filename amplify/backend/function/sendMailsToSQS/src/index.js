@@ -23,10 +23,6 @@ exports.handler = async (event) => {
 		};
 	} catch (error) {
 		console.error("Error processing emails:", error);
-		return {
-			statusCode: 500,
-			body: JSON.stringify("Error processing emails"),
-		};
 	}
 };
 

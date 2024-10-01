@@ -5,6 +5,13 @@ const SENDER_EMAIL = "awsweek14@hungpham.lol";
 
 exports.handler = async (event) => {
 	try {
+		const headers = {
+			"content-type": "application/json",
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Headers": "Content-Type",
+			"Access-Control-Allow-Methods": "GET",
+		};
+
 		for (const record of event.Records) {
 			const recipientEmail = record.body;
 
@@ -14,6 +21,7 @@ exports.handler = async (event) => {
 
 		return {
 			statusCode: 200,
+			headers,
 			body: JSON.stringify("Emails sent successfully via SES"),
 		};
 	} catch (error) {

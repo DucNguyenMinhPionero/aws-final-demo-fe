@@ -1,6 +1,7 @@
 "use client";
 
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import { ToastContainer } from "react-toastify";
 
 import NavBar from "./nav-bar";
 import SideBar from "./side-bar";
@@ -19,6 +20,7 @@ function Body({
 			<div className="p-4 sm:ml-64">
 				<div className="mt-14">{children}</div>
 			</div>
+			<ToastContainer position="top-right" />
 		</>
 	);
 }
