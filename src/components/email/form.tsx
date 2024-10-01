@@ -1,4 +1,4 @@
-import { post } from "aws-amplify/api";
+import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -10,18 +10,17 @@ export default function EmailForm() {
 
 	const sendAllMails = async function postTodo() {
 		try {
-			const restOperation = post({
-				apiName: "crawling",
-				path: "/emails",
-				options: {
-					body: JSON.stringify({ content, subject }),
-				},
-			});
+			const apiUrl =
+				"https://3e8guxp99g.execute-api.ap-northeast-1.amazonaws.com/dev/emails";
 
-			const { body } = await restOperation.response;
-			const response = await body.json();
+			const requestData = {
+				content,
+				subject,
+			};
 
-			if (response) {
+			const result = await axios.post(apiUrl, requestData, {});
+
+			if (result) {
 				toast.success("Send email successfully");
 			}
 		} catch {

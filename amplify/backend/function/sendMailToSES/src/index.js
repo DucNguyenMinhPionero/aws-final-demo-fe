@@ -9,7 +9,7 @@ exports.handler = async (event) => {
 			"content-type": "application/json",
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Headers": "Content-Type",
-			"Access-Control-Allow-Methods": "GET",
+			"Access-Control-Allow-Methods": "POST",
 		};
 
 		for (const record of event.Records) {

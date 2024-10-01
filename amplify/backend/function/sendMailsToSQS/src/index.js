@@ -10,6 +10,13 @@ const SQS_QUEUE_URL =
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 exports.handler = async (event) => {
+	const headers = {
+		"content-type": "application/json",
+		"Access-Control-Allow-Origin": "*",
+		"Access-Control-Allow-Headers": "Content-Type",
+		"Access-Control-Allow-Methods": "POST",
+	};
+
 	try {
 		// const body = event.options.body;
 		console.log(event);
@@ -19,6 +26,7 @@ exports.handler = async (event) => {
 
 		return {
 			statusCode: 200,
+			headers,
 			body: JSON.stringify("Emails processed successfully"),
 		};
 	} catch (error) {
