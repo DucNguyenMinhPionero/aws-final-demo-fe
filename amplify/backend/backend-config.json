@@ -82,6 +82,12 @@
 			"build": true,
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda"
+		},
+		"startCrawling": {
+			"build": true,
+			"dependsOn": [],
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
 		}
 	},
 	"parameters": {
@@ -146,6 +152,22 @@
 				{
 					"category": "function",
 					"resourceName": "sendMailsToSQS"
+				}
+			]
+		},
+		"AMPLIFY_function_startCrawling_deploymentBucketName": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "startCrawling"
+				}
+			]
+		},
+		"AMPLIFY_function_startCrawling_s3Key": {
+			"usedBy": [
+				{
+					"category": "function",
+					"resourceName": "startCrawling"
 				}
 			]
 		}

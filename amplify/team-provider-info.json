@@ -36,6 +36,10 @@
 				"sendMailsToSQS": {
 					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
 					"s3Key": "amplify-builds/sendMailsToSQS-764a334c693244595065-build.zip"
+				},
+				"startCrawling": {
+					"deploymentBucketName": "amplify-crawlingappfe-dev-683f8-deployment",
+					"s3Key": "amplify-builds/startCrawling-4f754f474d4b39535733-build.zip"
 				}
 			},
 			"storage": {

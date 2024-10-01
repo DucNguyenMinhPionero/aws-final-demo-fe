@@ -51,6 +51,13 @@ export type AmplifyDependentResourcesAttributes = {
 			Name: "string";
 			Region: "string";
 		};
+		startCrawling: {
+			Arn: "string";
+			LambdaExecutionRole: "string";
+			LambdaExecutionRoleArn: "string";
+			Name: "string";
+			Region: "string";
+		};
 	};
 	storage: {
 		s36e8ca1c7: {
