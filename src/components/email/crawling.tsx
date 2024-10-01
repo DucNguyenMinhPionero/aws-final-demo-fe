@@ -6,11 +6,8 @@ export default function Crawling() {
 	const [topic, setTopic] = useState("");
 	const [total, setTotal] = useState(0);
 	const [isRunning, setIsRunning] = useState(false);
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [response, setResponse] = useState(null);
 
 	useEffect(() => {
-		// Gọi API check task status khi component load
 		const checkTaskStatus = async () => {
 			try {
 				const apiUrl =
@@ -36,13 +33,14 @@ export default function Crawling() {
 		};
 
 		try {
-			// Gửi request với axios
+			setIsRunning(true);
 			const result = await axios.post(apiUrl, requestData, {});
 
-			setResponse(result.data); // Lấy dữ liệu từ response
-			setIsRunning(true);
-		} catch (error) {
-			console.error("Error starting crawl:", error);
+			if (result.data) {
+				toast.success("Start crawling successfully");
+			}
+		} catch {
+			toast.error("Something wrong. Please check again!");
 		}
 	};
 
@@ -57,14 +55,15 @@ export default function Crawling() {
 		};
 
 		try {
-			// Gửi request với axios
 			const result = await axios.post(apiUrl, requestData, {});
 
-			setResponse(result.data); // Lấy dữ liệu từ response
-			setIsRunning(false);
+			if (result.data) {
+				toast.success("Stop crawling successfully");
+			}
 		} catch {
 			toast.error("Error starting crawl:");
 		}
+		setIsRunning(false);
 	};
 
 	return (
@@ -116,11 +115,7 @@ export default function Crawling() {
 							type="button"
 							className="mr-4 flex justify-between items-center py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 sm:w-fit focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 						>
-							{isRunning ? (
-								<div className="spinner" />
-							) : (
-								<span className="ml-2">Start</span>
-							)}
+							{isRunning ? <div className="spinner" /> : <span>Start</span>}
 						</button>
 						<button
 							type="button"
@@ -128,7 +123,7 @@ export default function Crawling() {
 							onClick={stopCrawling}
 							className="flex justify-between items-center py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 sm:w-fit focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 						>
-							<span className="ml-2">Stop</span>
+							<span>Stop</span>
 						</button>
 					</div>
 				</form>
