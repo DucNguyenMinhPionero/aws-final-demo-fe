@@ -44,6 +44,7 @@ function CandidatePage() {
 		metadata: undefined,
 		_version: undefined,
 	});
+	const [searchTerm, setSearchTerm] = useState("");
 	const [candidates, setCandidates] = useState<Candidate[]>([]);
 	const [isLoading, setLoading] = useState(false);
 	const [currentToken, setCurrentToken] = useState<string | undefined>(
@@ -57,15 +58,27 @@ function CandidatePage() {
 
 	// function group
 	// call API
-	const getCandidates = useCallback(async (token?: string) => {
+	const getCandidates = useCallback(async (token?: string, text?: string) => {
+		const queryVar = text
+			? {
+					limit: PER_PAGE_LIMIT,
+					nextToken: token,
+					filter: {
+						name: {
+							contains: text,
+						},
+					},
+				}
+			: {
+					limit: PER_PAGE_LIMIT,
+					nextToken: token,
+				};
+
 		try {
 			setLoading(true);
 			const res = await API.graphql({
 				query: listCandidates,
-				variables: {
-					limit: PER_PAGE_LIMIT,
-					nextToken: token,
-				},
+				variables: queryVar,
 			});
 
 			if (res.data.listCandidates.nextToken) {
@@ -88,7 +101,7 @@ function CandidatePage() {
 			setPreviousTokens((prev) => [...prev, currentToken]);
 		}
 		setCurrentToken(nextToken);
-		getCandidates(nextToken);
+		getCandidates(nextToken, searchTerm);
 	};
 
 	const handlePrev = () => {
@@ -97,7 +110,7 @@ function CandidatePage() {
 				? previousTokens[previousTokens.length - 1]
 				: undefined,
 		);
-		getCandidates(previousTokens[previousTokens.length - 1]);
+		getCandidates(previousTokens[previousTokens.length - 1], searchTerm);
 		const clone = cloneDeep(previousTokens);
 		clone.pop();
 		setPreviousTokens(clone);
@@ -116,7 +129,11 @@ function CandidatePage() {
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
 			<div className={clsx(modalInfo.isOpen ? "blur" : "")}>
 				<div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
-					<CandidateSearch />
+					<CandidateSearch
+						getCandidates={getCandidates}
+						searchTerm={searchTerm}
+						setSearchTerm={setSearchTerm}
+					/>
 				</div>
 				{/* table */}
 				{isLoading ? (

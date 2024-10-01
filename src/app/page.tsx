@@ -22,6 +22,7 @@ Amplify.configure(config);
 
 function Home() {
 	// state
+	const [searchTerm, setSearchTerm] = useState("");
 	const [users, setUsers] = useState<User[]>([]);
 	const [isLoading, setLoading] = useState(false);
 	const [nextToken, setNextToken] = useState<string | undefined>(undefined);
@@ -35,15 +36,27 @@ function Home() {
 
 	// function group
 	// call API
-	const getUsers = useCallback(async (token?: string) => {
+	const getUsers = useCallback(async (token?: string, email?: string) => {
+		const queryVar = email
+			? {
+					limit: PER_PAGE_LIMIT,
+					nextToken: token,
+					filter: {
+						email: {
+							contains: email,
+						},
+					},
+				}
+			: {
+					limit: PER_PAGE_LIMIT,
+					nextToken: token,
+				};
+
 		try {
 			setLoading(true);
 			const res = await API.graphql({
 				query: listUsers,
-				variables: {
-					limit: PER_PAGE_LIMIT,
-					nextToken: token,
-				},
+				variables: queryVar,
 			});
 
 			if (res.data.listUsers.nextToken) {
@@ -66,7 +79,7 @@ function Home() {
 			setPreviousTokens((prev) => [...prev, currentToken]);
 		}
 		setCurrentToken(nextToken);
-		getUsers(nextToken);
+		getUsers(nextToken, searchTerm);
 	};
 
 	const handlePrev = () => {
@@ -75,7 +88,7 @@ function Home() {
 				? previousTokens[previousTokens.length - 1]
 				: undefined,
 		);
-		getUsers(previousTokens[previousTokens.length - 1]);
+		getUsers(previousTokens[previousTokens.length - 1], searchTerm);
 		const clone = cloneDeep(previousTokens);
 		clone.pop();
 		setPreviousTokens(clone);
@@ -90,7 +103,11 @@ function Home() {
 		<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
 			{/* search */}
 			<div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
-				<UserSearch />
+				<UserSearch
+					getUsers={getUsers}
+					searchTerm={searchTerm}
+					setSearchTerm={setSearchTerm}
+				/>
 			</div>
 			{/* table */}
 			{isLoading ? (

@@ -42,6 +42,7 @@ function PostPage() {
 		_version: undefined,
 	});
 	const [posts, setPosts] = useState<Post[]>([]);
+	const [searchTerm, setSearchTerm] = useState("");
 	const [isLoading, setLoading] = useState(false);
 	const [nextToken, setNextToken] = useState<string | undefined>(undefined);
 	const [currentToken, setCurrentToken] = useState<string | undefined>(
@@ -54,15 +55,27 @@ function PostPage() {
 
 	// function group
 	// call API
-	const getPosts = useCallback(async (token?: string) => {
+	const getPosts = useCallback(async (token?: string, id?: string) => {
+		const queryVar = id
+			? {
+					limit: PER_PAGE_LIMIT,
+					nextToken: token,
+					filter: {
+						id: {
+							contains: id,
+						},
+					},
+				}
+			: {
+					limit: PER_PAGE_LIMIT,
+					nextToken: token,
+				};
+
 		try {
 			setLoading(true);
 			const res = await API.graphql({
 				query: listPosts,
-				variables: {
-					limit: PER_PAGE_LIMIT,
-					nextToken: token,
-				},
+				variables: queryVar,
 			});
 
 			if (res.data.listPosts.nextToken) {
@@ -85,7 +98,7 @@ function PostPage() {
 			setPreviousTokens((prev) => [...prev, currentToken]);
 		}
 		setCurrentToken(nextToken);
-		getPosts(nextToken);
+		getPosts(nextToken, searchTerm);
 	};
 
 	const handlePrev = () => {
@@ -94,7 +107,7 @@ function PostPage() {
 				? previousTokens[previousTokens.length - 1]
 				: undefined,
 		);
-		getPosts(previousTokens[previousTokens.length - 1]);
+		getPosts(previousTokens[previousTokens.length - 1], searchTerm);
 		const clone = cloneDeep(previousTokens);
 		clone.pop();
 		setPreviousTokens(clone);
@@ -114,7 +127,11 @@ function PostPage() {
 			<div className={clsx(modalInfo.isOpen ? "blur" : "")}>
 				{/* search */}
 				<div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
-					<PostSearch />
+					<PostSearch
+						getPosts={getPosts}
+						searchTerm={searchTerm}
+						setSearchTerm={setSearchTerm}
+					/>
 				</div>
 				{/* table */}
 				{isLoading ? (
