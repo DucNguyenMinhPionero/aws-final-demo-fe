@@ -21,13 +21,13 @@ body {
 }
 
 .spinner {
-	border: 2px solid rgba(0, 0, 0, 0.1); /* MĂ u xĂ¡m nháº¡t */
-	border-top: 2px solid #000; /* MĂ u Ä‘en */
+	border: 2px solid rgba(0, 0, 0, 0.1);
+	border-top: 2px solid #000;
 	border-radius: 50%;
-	width: 20px; /* KĂ­ch thÆ°á»›c spinner */
+	width: 20px;
 	height: 20px;
 	animation: spin 0.6s linear infinite;
-	margin-left: 5px; /* CĂ¡ch giá»¯a spinner vĂ  text */
+	margin-left: 5px;
 }
 
 @keyframes spin {
