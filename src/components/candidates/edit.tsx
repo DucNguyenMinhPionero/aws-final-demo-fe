@@ -60,6 +60,7 @@ export default function CandidateEditModal({
 				},
 			});
 			setInput({});
+			toast.success("Update candidate successfully");
 		} catch {
 			toast.error("Something wrong! Please try again");
 		}

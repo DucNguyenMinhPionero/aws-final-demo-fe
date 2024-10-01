@@ -56,6 +56,7 @@ export default function PostEditModal({
 					},
 				},
 			});
+			toast.success("Update post successfully");
 		} catch {
 			toast.error("Something wrong! Please try again");
 		}

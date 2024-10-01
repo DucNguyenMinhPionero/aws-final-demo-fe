@@ -1,9 +1,13 @@
+import { generateClient } from "aws-amplify/api";
 import clsx from "clsx";
 import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 import { Post } from "@/app/libs/type";
 import { type ModalInfo } from "@/app/posts/page";
+import { deletePosts } from "@/graphql/mutations";
 import Spinner from "../common/spinner";
 
 type PostTableProps = {
@@ -17,6 +21,38 @@ export default function PostTable({
 	posts,
 	isLoading,
 }: PostTableProps) {
+	const API = generateClient();
+
+	const handleDeleteItem = (id: string, _version: number) => {
+		if (!id) {
+			return;
+		}
+
+		Swal.fire({
+			title: "Do you want to delete this post?",
+			showCancelButton: true,
+			confirmButtonText: "Yes",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				try {
+					API.graphql({
+						query: deletePosts,
+						variables: {
+							input: {
+								id,
+								_version,
+							},
+						},
+					});
+
+					toast.success("Delete post successfully");
+				} catch {
+					toast.error("Something wrong. Please try again!");
+				}
+			}
+		});
+	};
+
 	return (
 		<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 			<thead
@@ -67,7 +103,7 @@ export default function PostTable({
 							)}
 						</td>
 						<td className="px-6 py-4">{item.candidatesPostId}</td>
-						<td className="px-6 py-4">
+						<td className="px-6 py-4 flex justify-start items-center">
 							<p
 								onClick={() =>
 									setModalInfo({
@@ -79,9 +115,15 @@ export default function PostTable({
 										_version: item._version,
 									})
 								}
-								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+								className="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4"
 							>
 								Edit
+							</p>
+							<p
+								onClick={() => handleDeleteItem(item.id, item._version)}
+								className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+							>
+								Delete
 							</p>
 						</td>
 					</tr>
