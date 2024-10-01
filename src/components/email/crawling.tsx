@@ -34,11 +34,9 @@ export default function Crawling() {
 
 		try {
 			setIsRunning(true);
-			const result = await axios.post(apiUrl, requestData, {});
+			await axios.post(apiUrl, requestData, {});
 
-			if (result.data) {
-				toast.success("Start crawling successfully");
-			}
+			toast.success("Start crawling successfully");
 		} catch {
 			toast.error("Something wrong. Please check again!");
 		}
@@ -55,11 +53,9 @@ export default function Crawling() {
 		};
 
 		try {
-			const result = await axios.post(apiUrl, requestData, {});
+			await axios.post(apiUrl, requestData, {});
 
-			if (result.data) {
-				toast.success("Stop crawling successfully");
-			}
+			toast.success("Stop crawling successfully");
 		} catch {
 			toast.error("Error starting crawl:");
 		}
