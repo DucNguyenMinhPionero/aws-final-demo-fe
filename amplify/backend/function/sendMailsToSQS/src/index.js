@@ -18,11 +18,10 @@ exports.handler = async (event) => {
 	};
 
 	try {
-		// const body = event.options.body;
-		console.log(event);
+		const { subject, content } = event;
 		const emails = await getEmailsFromDynamoDB();
 		const validEmails = emails.filter(validateEmail);
-		await sendEmailsToSQS(validEmails);
+		await sendEmailsToSQS(validEmails, subject, content);
 
 		return {
 			statusCode: 200,
@@ -37,6 +36,7 @@ exports.handler = async (event) => {
 async function getEmailsFromDynamoDB() {
 	const params = {
 		TableName: DYNAMODB_TABLE,
+		Limit: 15,
 	};
 
 	const command = new ScanCommand(params);
@@ -44,14 +44,18 @@ async function getEmailsFromDynamoDB() {
 	return result.Items.map((item) => item.email.S);
 }
 
-async function sendEmailsToSQS(emails) {
+async function sendEmailsToSQS(emails, subject, content) {
 	const promises = emails.map((email) => {
 		console.log("sending", email);
+		const messageBody = JSON.stringify({
+			email: email,
+			subject: subject,
+			content: content,
+		});
 		const params = {
 			QueueUrl: SQS_QUEUE_URL,
-			MessageBody: email,
+			MessageBody: messageBody,
 		};
-
 		const command = new SendMessageCommand(params);
 		return sqsClient.send(command);
 	});
